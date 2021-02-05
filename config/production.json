@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://abhay123:abhay123@rake-maintenance-databa.uvo5j.mongodb.net/<dbname>?retryWrites=true&w=majority",
+    "jwtSecret": "This is Top Secret"
+}
