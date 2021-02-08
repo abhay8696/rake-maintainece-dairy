@@ -25,10 +25,13 @@ app.use('/api/log/washingAndCleaning', require('./routes/api/logContents/washing
 //Serve static assest in production
 
 if(process.env.NODE_ENV === 'production'){
+    console.log('found production')
     //set the static folder
     app.use(express.static('client/build'))
+    console.log('client called...')
 
     app.get('*', (req, res)=> {
+
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     })
 }
