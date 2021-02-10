@@ -29,6 +29,7 @@ if(process.env.NODE_ENV === 'production'){
     console.log('found production')
     //set the static folder
     app.use(express.static('client/build'))
+    if(express.static('client/build')) console.log(true)
     console.log('client called...')
 
     app.get('*', (req, res)=> {
