@@ -34,7 +34,10 @@ if(process.env.NODE_ENV === 'production'){
 
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     })
-}else(console.log('not production'))
+}else{
+    console.log('not production')
+    console.log(process.env.NODE_ENV)
+    }
 
 
 const PORT = process.env.PORT || 8000;
