@@ -9,7 +9,7 @@
     "client": "npm start --prefix client",
     "buildd": "npm run build --prefix client",
     "install-client": "cd client && npm install",
-    "heroku-postbuild": "NODE_ENV='production' && npm run install-client && npm run buildd",
+    "heroku-postbuild": "set process.env.NODE_ENV=production && npm run install-client && npm run buildd",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "abhayKamble",
