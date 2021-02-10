@@ -7,7 +7,7 @@
     "start": "node server",
     "server": "nodemon server",
     "client": "npm start --prefix client",
-    "buildd": "npm run build --prefix client cross-env NODE_ENV=production OTHERFLAG=myValue webpack --config build/webpack.config.js",
+    "buildd": "npm run build --prefix client ",
     "install-client": "cd client && npm install",
     "heroku-postbuild": "npm run install-client && npm run buildd",
     "dev": "concurrently \"npm run server\" \"npm run client\""
