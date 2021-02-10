@@ -24,7 +24,7 @@ app.use('/api/log/washingAndCleaning', require('./routes/api/logContents/washing
 
 // console.log(process.env)
 //Serve static assest in production
-process.env.NODE_ENV = 'production'
+// process.env.NODE_ENV = 'production'
 if(process.env.NODE_ENV === 'production'){
     console.log('found production')
     //set the static folder
@@ -44,4 +44,4 @@ if(process.env.NODE_ENV === 'production'){
 
 const PORT = process.env.PORT || 8000;
 
-app.listen(PORT, ()=> console.log('Server ready on port 8000'))
+app.listen(PORT, ()=> console.log(`Server ready on port ${PORT}`))
