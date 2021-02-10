@@ -24,7 +24,7 @@ app.use('/api/log/washingAndCleaning', require('./routes/api/logContents/washing
 
 // console.log(process.env)
 //Serve static assest in production
-
+process.env.NODE_ENV = 'production'
 if(process.env.NODE_ENV === 'production'){
     console.log('found production')
     //set the static folder
