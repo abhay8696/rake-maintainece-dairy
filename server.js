@@ -22,6 +22,7 @@ app.use('/api/log/coach', require('./routes/api/logContents/coach'))
 app.use('/api/log/sickCoach', require('./routes/api/logContents/sickCoach'))
 app.use('/api/log/washingAndCleaning', require('./routes/api/logContents/washingAndCleaning'))
 
+console.log(process.env)
 //Serve static assest in production
 
 if(process.env.NODE_ENV === 'production'){
