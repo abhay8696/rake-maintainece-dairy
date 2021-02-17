@@ -31,7 +31,10 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      padding: theme.spacing(1)
+      padding: theme.spacing(1),
+      [theme.breakpoints.down('xs')]:{
+        padding: '0px'
+      }
     },
     allLogs: {
       textDecoration: 'none',
@@ -49,7 +52,10 @@ const useStyles = makeStyles((theme) => ({
     appTitle: {
       fontWeight: 'bold',
       backgroundColor: '',
-      fontSize: '1.5rem'
+      fontSize: '1.5rem',
+      [theme.breakpoints.down('xs')]:{
+        fontSize: '1.2rem'
+      }
     },
     userButton:{
       // display: 'flex',
@@ -82,7 +88,8 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-around'
       },
       [theme.breakpoints.down('xs')]:{
-        backgroundColor: 'green'
+        
+
       }
     },
     date:{ 
