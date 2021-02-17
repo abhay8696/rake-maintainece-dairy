@@ -12,6 +12,7 @@ import AppsIcon from '@material-ui/icons/Apps';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Tooltip from '@material-ui/core/Tooltip';
 
+import './styles/Navbar.css'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -79,6 +80,9 @@ const useStyles = makeStyles((theme) => ({
       [theme.breakpoints.up('sm')]: {
         width: '15%',
         justifyContent: 'space-around'
+      },
+      [theme.breakpoints.down('xs')]:{
+        backgroundColor: 'green'
       }
     },
     date:{ 

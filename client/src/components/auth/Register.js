@@ -97,7 +97,7 @@ const Register =()=> {
         </Typography>
         <form 
           className={classes.form} 
-          noValidate 
+          
           onSubmit={onSubmit}>
           <TextField
             variant="outlined"
@@ -108,7 +108,7 @@ const Register =()=> {
             label="Name"
             name="name"
             autoComplete="name"
-            autoFocus
+            autoFocus={true}
             value= {name}
             onChange={(evt)=>handleNameChange(evt)}
           />
@@ -121,7 +121,6 @@ const Register =()=> {
             label="Email Address"
             name="email"
             autoComplete="email"
-            autoFocus
             value={email}
             onChange={(evt)=>handleEmailChange(evt)}
           />
@@ -134,7 +133,6 @@ const Register =()=> {
             label="Batch Name"
             name="batch"
             autoComplete="Batch"
-            autoFocus
             value={batch}
             onChange={(evt)=>handleBatchChange(evt)}
           />
@@ -147,7 +145,6 @@ const Register =()=> {
             label="Designation"
             name="designation"
             autoComplete="designation"
-            autoFocus
             value={designation}
             onChange={(evt)=>handleDesignationChange(evt)}
           />

@@ -81,7 +81,7 @@ const Login = () => {
           <Typography component="h1" variant="h5">
             Log In
           </Typography>
-          <form className={classes.form} noValidate onSubmit={handleSubmit(onSubmit)}>
+          <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
             <TextField
               variant="outlined"
               margin="normal"

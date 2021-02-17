@@ -20,26 +20,6 @@ import './App.css';
 // import 'bootstrap/dist/css/bootstrap.min.css'
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      backgroundColor: '#fbe8a6',
-      height: '100vh',
-      overflow: 'hidden'
-    },
-    body: {
-      width: '100%',
-      height: '92%',
-      display: 'flex',
-
-    },
-    SideBar: {
-      // backgroundColor: 'red',
-      width: '20%',
-      position: 'sticky',
-      [theme.breakpoints.down('sm')] : {
-        display : 'none'
-      },
-      height: '100%'
-    },
     mainArea: {
       overflow: 'auto',
       [theme.breakpoints.up('md')] : {
@@ -89,7 +69,7 @@ function App() {
 
   
   return (
-    <div className={classes.root}>
+    <div className = "root">
     <Router>
       <UserContext.Provider value={{userData, setUserData}}>
           <ProfileContext.Provider value={{profileData, setProfileData}}>
@@ -97,7 +77,7 @@ function App() {
               <CurrentTrainContext.Provider value={{CurrentTrain, setCurrentTrain}}>
                 <Fragment>
                     <Navbar />
-                    <div className={classes.body}>
+                    <div className="body">
                       <div className={classes.mainArea}>
                       <Route exact path='/login' component={ Login }/>
                       <Route exact path='/register' component={ Register } />
