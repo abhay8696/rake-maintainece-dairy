@@ -329,6 +329,7 @@ const classes = useStyles(),
                     <div className={classes.boxLabels}>Protection Of Rake</div>
                     <span>
                     <span>
+                        {/* <p className={classes.innerLabels}>Line Blocking Time </p> */}
                         <TextField
                         type= 'time'
                         variant="outlined"
@@ -343,10 +344,12 @@ const classes = useStyles(),
                         autoComplete="lineBlockingTime"
                         onChange={evt=>handleProtectionOfRakeChange(evt)}
                         className={classes.boxes}
+                        style={{maxWidth:'30ch', width:'150px'}}
                         autoFocus
                         /> 
                     </span>
                     <span>
+                        {/* <p className={classes.innerLabels}>Line Release Time </p> */}
                         <TextField
                         type= 'time'
                         variant="outlined"
@@ -361,6 +364,7 @@ const classes = useStyles(),
                         autoComplete="lineReleaseTime"
                         onChange={evt=>handleProtectionOfRakeChange(evt)}
                         className={classes.boxes}
+                        style={{maxWidth:'30ch', width:'150px'}}
                         autoFocus
                         /> 
                     </span>
@@ -437,6 +441,7 @@ const classes = useStyles(),
                             onChange={evt=>handleTrainDataChange(evt)}
                             className={classes.boxes}
                             autoFocus
+                            style={{maxWidth:'30ch', width:'150px'}}
                             /> 
                         </div>
                         
@@ -454,6 +459,7 @@ const classes = useStyles(),
                             onChange={evt=>handleTrainDataChange(evt)}
                             className={classes.boxes}
                             autoFocus
+                            style={{maxWidth:'30ch', width:'150px'}}
                             /> 
                         </div>
 
@@ -469,6 +475,7 @@ const classes = useStyles(),
                                 autoComplete="remarks"
                                 onChange={evt=>handleTrainDataChange(evt)}
                                 className={classes.boxes}
+                                style={{maxWidth:'30ch', width:'150px'}}
                                 />
                         </div>
                     </span>

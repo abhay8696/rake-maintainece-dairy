@@ -179,6 +179,9 @@ const useStyles = makeStyles((theme) => ({
     //   fontSize: '1.1rem'
     fontWeight: 'bold'
   },
+  innerLabels:{
+    marginBottom: '0px'
+  },
   trainNdeleteButton:{
     // backgroundColor: 'red',
   },
