@@ -20,12 +20,19 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: theme.spacing(1),
         width: '100%',
         [theme.breakpoints.down('sm')]: {
-            width: '100%'
+            width: '100%',
         },
         height: '100%'
     },
     accordionSummary:{
         display: 'flex',
+        paddingLeft: '16px',
+        paddingRight: '16px',
+        [theme.breakpoints.down('sm')]: {
+            paddingLeft: '4px',
+            paddingRight: '4px',
+        },
+        // backgroundColor: 'red',
     },
     deleteButton:{
         display: 'flex',
@@ -100,7 +107,7 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '5px',
         // backgroundColor: '#b5b5b5',
         padding: theme.spacing(0),
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up('md')]: {
             marginLeft: theme.spacing(1), 
             fontSize: '25px',
             padding: theme.spacing(1),

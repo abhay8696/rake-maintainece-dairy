@@ -79,6 +79,7 @@ const useRowStyles = makeStyles({
         paddingRight: '0px',
         minWidth: '50%'
       },
+      minHeight: '76px',
     },
     sickButton:{
       color: 'red',
@@ -103,6 +104,7 @@ const CoachRow = (props)=> {
     const [displayUploadIcon, setDisplayUploadIcon] = useState('block')
     const [displayLoopIcon, setDisplayLoopIcon] = useState('none')
     const [displayCheckIcon, setDisplayCheckIcon] = useState('none')
+    const [borderBottom, setborderBottom] = useState('grey')
 
     const [coachData, setCoachData] = useState([{
       serialNo: serialNo,
@@ -175,6 +177,7 @@ const CoachRow = (props)=> {
       console.log(body)
       setDisplayUploadIcon('none')
       setDisplayLoopIcon('block')
+      setborderBottom('orange')
         await axios
         .post(`/api/log/coach/${currentLog}/${trainId}`, body, { headers: { "x-auth-token": token}})
         .then(response=> {
@@ -183,6 +186,7 @@ const CoachRow = (props)=> {
           if(response.status === 200){
             setDisplayLoopIcon('none')
             setDisplayCheckIcon('block')
+            setborderBottom('green')
           }
         })
         .catch(error=> {
@@ -268,7 +272,7 @@ const CoachRow = (props)=> {
           {
             displayCells()
           }
-          <TableCell className={classes.iconCell}>
+          <TableCell className={classes.iconCell} style={{borderBottom:`4px solid ${borderBottom}`}}>
             <Button  onClick={()=> sendData()} className={classes.uploadButton} style={{display: displayUploadIcon}}><CloudUploadIcon /></Button>
             <Button className={classes.LoopIcon} style={{display: displayLoopIcon}}>
               <LoopIcon /> 

@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
+import { useLocation } from "react-router-dom";
 import UserContext from '../../context/UserContext' 
 import Train from './Train'
 import CurrentLogContext from '../../context/CurrentLogContext'
@@ -218,11 +219,13 @@ const classes = useStyles(),
             return array
         }
     },
+    
 
     SubmitTrain = async (evt)=> {
         evt.preventDefault()
         console.log('clicked')
         settoggleFetchIcon('block')
+        window.scrollTo(0,0)
         await sendData()
         await fetchLogData();
         settoggleFetchIcon('none')
@@ -416,10 +419,10 @@ const classes = useStyles(),
                                 <em>None</em>
                             </MenuItem>
                             <MenuItem value={1}>1</MenuItem>
-                            <MenuItem value={1}>2</MenuItem>
-                            <MenuItem value={1}>3</MenuItem>
-                            <MenuItem value={1}>4</MenuItem>
-                            <MenuItem value={1}>5</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                            <MenuItem value={4}>4</MenuItem>
+                            <MenuItem value={5}>5</MenuItem>
                         </Select>
                         </div> 
                     </span>

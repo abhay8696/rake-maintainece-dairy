@@ -13,6 +13,7 @@ import axios from 'axios'
 const useStyles = makeStyles((theme) => ({
     root:{
         [theme.breakpoints.down('sm')]:{
+            width: '32px',
             // display: 'none !important'
         }
     },
@@ -21,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
         // border: '1px solid black',
         '& :hover': {
             color: 'red',
+        },
+        [theme.breakpoints.down('sm')]:{
+            padding:'0px',
         }
     }
 }))
