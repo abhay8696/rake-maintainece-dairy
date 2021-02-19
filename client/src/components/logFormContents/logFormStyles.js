@@ -74,10 +74,10 @@ const useStyles = makeStyles((theme) => ({
           maxWidth: '45%',
         },
         '& > *:nth-child(3)': {
-          width: '30%',
+          width: '25%',
         },
         '& > *:nth-child(4)': {
-          maxWidth: '60%',
+          maxWidth: '65%',
         },
       },
     },
