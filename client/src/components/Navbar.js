@@ -149,7 +149,13 @@ const Navbar = () => {
               </span>
               {/* <span className={classes.rightSide}> */}
                     <Button type="button"  className={classes.userButton} aria-controls="simple-menu" aria-haspopup="true" onClick={handleMenuOpen}>
-                      <span className={classes.userName}>{profileData.name}</span>
+                      {
+                        //show username if logged in else show nothing
+                        profileData.name ? 
+                          <span className={classes.userName}>{profileData.name}</span>
+                        :
+                          <> </>
+                      }
                       <Tooltip title="User" className={classes.tooltip}>
                         <span className={classes.userIcon}><AccountCircleIcon /></span>
                       </Tooltip> 

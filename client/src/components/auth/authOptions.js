@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { useHistory } from 'react-router-dom' //for url history
 import UserContext from '../../context/UserContext'
 import CurrentLogContext from '../../context/CurrentLogContext'
+import ProfileContext from '../../context/ProfileContext' 
 
 import { makeStyles } from '@material-ui/core/styles';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -36,6 +37,7 @@ const AuthOptions = () => {
     const classes = useStyles();
     const {userData, setUserData} = useContext(UserContext)
     const {CurrentLog, setCurrentLog} = useContext(CurrentLogContext)
+    const { profileData, setProfileData } = useContext(ProfileContext)
 
     const   history = useHistory(),
             register = ()=> history.push('/register'),
@@ -46,10 +48,16 @@ const AuthOptions = () => {
                     user: undefined
                 })
                 setCurrentLog(undefined)
+                setProfileData({
+                    name: '',
+                    designation: '',
+                    batch: '',
+                    logs: []
+                  })
                 localStorage.setItem("x-auth-token", "")
                 localStorage.setItem("userProfile", "")
                 history.push('/login')
-            }
+            }   
 
 
     return (

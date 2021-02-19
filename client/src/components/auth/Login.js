@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom' //for url history
 
 import Button from '@material-ui/core/Button';
@@ -39,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
   link:{
     // textDecoration: 'none',
     color: 'black'
+  },
+  intro: {
+    textAlign: 'center'
   }
 }));
 
@@ -47,6 +50,9 @@ const Login = () => {
     const history = useHistory()
     const {register, handleSubmit } = useForm()
     const {userData, setUserData} = useContext(UserContext)
+    const [loginError, setloginError] = useState(false)
+    const [helperTextEmail, sethelperTextEmail] = useState('')
+    const [helperTextPassword, sethelperTextPassword] = useState('')
 
     const onSubmit = async data=> {
       console.log(data)
@@ -69,12 +75,22 @@ const Login = () => {
       })
       .catch(err=> {
         console.log('!!!!!!!!!!!'+err)
+        setloginError(true)
+        sethelperTextEmail('Enter Valid Email ID')
+        sethelperTextPassword('Enter Valid Password')
         console.log(data)
       })
     }
 
     return (
       <Container component="main" maxWidth="xs">
+        <p className={classes.intro}>
+          Rake Maintenance Diary is simple Web-App which stores everyday information
+          of trians and coaches which are maintained in depot.
+        </p>
+        <p className={classes.intro}> 
+          It's Digital. It's Online. It's Paperless!
+        </p>
         <CssBaseline />
         <div className={classes.paper}>
           <LockIcon />
@@ -93,6 +109,9 @@ const Login = () => {
               name="email"
               autoComplete="email"
               autoFocus
+              error={loginError}
+              helperText={helperTextEmail}
+              onChange={()=>{ sethelperTextEmail(''); setloginError(false)}}
             />
             <TextField
               variant="outlined"
@@ -105,6 +124,9 @@ const Login = () => {
               type="password"
               id="password"
               autoComplete="current-password"
+              error={loginError}
+              helperText={helperTextPassword}
+              onChange={()=>{ sethelperTextPassword(''); setloginError(false)}}
             />
             <Button
               type="submit"
