@@ -85,7 +85,7 @@ const Login = () => {
     return (
       <Container component="main" maxWidth="xs">
         <p className={classes.intro}>
-          Rake Maintenance Diary is simple Web-App which stores everyday information
+          Rake Maintenance Diary is a simple Web-App which stores everyday information
           of trians and coaches which are maintained in depot.
         </p>
         <p className={classes.intro}> 

@@ -176,7 +176,7 @@ const Header = (props) => {
                     </Select>
                   </div>  
                 </div>
-                <div >
+                <div className={classes.timeDiv}>
                   <span>Duty Hours</span>
                     <span className={classes.dutyHours}>
                       <TextField

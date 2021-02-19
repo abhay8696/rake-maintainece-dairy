@@ -68,10 +68,16 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
         width: '100%',
         justifyContent: 'space-between',
-        '& > *': {
+        '& > *:not(:last-child):not(:nth-child(3))': {
           // marginLeft: theme.spacing(0.1),
           // margin: theme.spacing(1),
           maxWidth: '45%',
+        },
+        '& > *:nth-child(3)': {
+          width: '30%',
+        },
+        '& > *:nth-child(4)': {
+          maxWidth: '60%',
         },
       },
     },
