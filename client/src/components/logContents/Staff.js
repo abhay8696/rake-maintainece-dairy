@@ -94,7 +94,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     [theme.breakpoints.down('sm')]:{
-      justifyContent: 'flex-start'
+      justifyContent: 'space-between'
     },
     flexWrap: 'wrap',
     // margin: '8px 0px'
@@ -102,13 +102,14 @@ const useStyles = makeStyles((theme) => ({
   strengthObject:{
     width: '205px',
     display: 'flex',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: 'white',
     margin: '0px 0px',
     padding: '8px',
     [theme.breakpoints.down('sm')]: {
-        width: '25%',
+        minWidth: '25%',
+        maxWidth: '28%',
     },
     borderRight: '1px solid #a19f9f',
     borderBottom: '1px solid #a19f9f',
@@ -130,12 +131,12 @@ const Staff = (props) => {
     const {testing, carpentry, oiling, otherWorks, 
         pipeFitting, strength, underGear , logData} = props,
         {absent, onLeave, onRoll, physicallyPresent, sick, underRest} = logData.staff[0].totalSacntionedStrength,
-        works1 = ['Testing','Carpentry','Oiling','Other Works',
-                  'Pipe Line','Under Gear',],
-        works2 = ['testing','carpentry','oiling','otherWorks',
-                  'pipeFitting','underGear',],
-        strength1 = ['Absent', 'On Leave', 'On Roll', 'Sick', 'Under Rest', 'Physically Present'],
-        strength2 = ['absent', 'onLeave', 'onRoll', 'sick', 'underRest', 'physicallyPresent'],
+        works1 = ['Testing','Carpentry',
+                  'Pipe Line','Under Gear','Oiling','Other Works',],
+        works2 = ['testing','carpentry',
+                  'pipeFitting','underGear','oiling','otherWorks',],
+        strength1 = ['On Roll', 'Physically Present', 'Under Rest', 'On Leave', 'Absent',  'Sick'],
+        strength2 = ['onRoll', 'physicallyPresent', 'underRest', 'onLeave', 'absent',  'sick'],
 
         displayPaperObjects = ()=> {
           const array = []
