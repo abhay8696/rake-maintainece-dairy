@@ -76,9 +76,13 @@ const Log = (props) => {
                         logData    = {logData}
                         underGear   = {underGear}
                     />
-                    {
-                        displayTrains()
-                    }
+                    <br/>
+                    <div>
+                        <p>Train Information</p>
+                        {
+                            displayTrains()
+                        }
+                    </div>
                 </div >
         // return <h1>asdad</h1>
     }

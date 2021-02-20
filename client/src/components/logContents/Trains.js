@@ -240,15 +240,15 @@ const Train = (props) => {
                 >
                     <div className={classes.AccordionSummaryBody}>
                     <div>
-                        <span className={classes.property}>Train No </span>
+                        <span className={classes.property}>No</span>
                         <span className={classes.value}>{trainNo}</span>
                     </div>
                     <div>
-                        <span className={classes.property}>Train Name</span>
+                        <span className={classes.property}>Name</span>
                         <span className={classes.value}>{trainName}</span>
                     </div>
                     <div>
-                        <span className={classes.property}>Pit No</span>
+                        <span className={classes.property}>Pit</span>
                         <span className={classes.value}>{pitlineNo}</span>
                     </div>
                     <div>

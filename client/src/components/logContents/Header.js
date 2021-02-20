@@ -46,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '2rem',
       margin: '4px 0',
       display: 'flex',
+      [theme.breakpoints.down('sm')]:{
+        fontSize: '1.8rem'
+      },
     },
     dutyTime:{
       margin: '0px 4px'
