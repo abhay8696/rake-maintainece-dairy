@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'white',
     margin: '4px 0px',
     padding: '8px',
-    width: '50%',
+    width: '45%',
     maxWidth: '600px',
     borderRight: '1px solid #a19f9f',
     borderBottom: '1px solid #a19f9f',
