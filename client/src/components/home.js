@@ -16,6 +16,7 @@ import GridOffIcon from '@material-ui/icons/GridOff';
 import axios from 'axios'
 import { Link, useHistory } from 'react-router-dom'
 
+const cardColors = ['#55c202', '#c20202', '#c26502', '#a2c202', '#0cc202', '#02afc2', '#c20242', '#c2b802']
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -110,9 +111,6 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 275,
     maxWidth: '500px',
     margin: '4px',
-    '&:hover': {
-      backgroundColor: '#f4976c'
-    },
     [theme.breakpoints.up('lg')]: {
       // margin: '8px 22px',
     },
@@ -120,6 +118,10 @@ const useStyles = makeStyles((theme) => ({
       width: '100%',
       margin:'4px 0px',
     },
+    boxShadow: '2px 2px 6px 0px rgba(50, 50, 50, 0.83)',
+  },
+  cardRoot:{
+    padding: '2px 8px',
   },
   bullet: {
     display: 'inline-block',
@@ -130,7 +132,16 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 14,
     display: 'flex',
     alignItems: 'baseline',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+  },
+  cardActions:{
+    display: 'flex', 
+    justifyContent: 'center'
+  },
+  openLogButton:{
+    border: '1px soild grey',
+    backgroundColor: 'grey',
+    borderRadius: '5px'
   },
   pos: {
     marginBottom: 12,
@@ -208,8 +219,8 @@ const Home = (props) => {
       log.trains.map(train => {
         array.push(
           <Typography variant="body2" component="p" className={classes.title}>
+            <span style={{textAlign: 'left'}}>{"Train No: " + train.trainNo}</span>
             <span>{train.trainName}</span> 
-            <span style={{textAlign: 'left'}}>{"Train: " + train.trainNo}</span>
           </Typography>
         )
       })
@@ -218,15 +229,19 @@ const Home = (props) => {
 
     const displayLog = ()=> {
       let divArray = []
+      let num = 0
       profileData.logs.map(log=>{
+        num === cardColors.length-1 ? num=0 : num++  //to generate font-color 
         divArray.push(<Card className={classes.card}>
-          <CardContent>
-            <Typography className={classes.title} color="textPrimary" gutterBottom>
+          <CardContent className={classes.cardRoot} style={{color: cardColors[num]}}>
+            <Typography className={classes.title} style={{color: cardColors[num]}} gutterBottom>
+              <span className={classes.dateDay}>
+                <Typography variant="h5" component="h2">
+                  {log.header[0].date}
+                </Typography>
+                <span>{log.header[0].day}</span>
+              </span>
               <span>{log.header[0].depot}</span>
-              <span>{log.header[0].day}</span>
-            </Typography>
-            <Typography variant="h5" component="h2">
-              {log.header[0].date}
             </Typography>
             <Typography className={classes.pos} color="textSecondary">
             </Typography>
@@ -239,10 +254,12 @@ const Home = (props) => {
                   </Typography>
               }
           </CardContent>
-          <CardActions>
-            <Button size="small">
-              <Link to={{ pathname: "/Log", state: log }}>Open Log</Link>
-            </Button>
+          <CardActions className={classes.cardActions}>
+            <Link to={{ pathname: "/Log", state: log }} style={{textDecoration:'none'}}>
+              <Button size="small" className={classes.openLogButton} style={{backgroundColor:cardColors[num]}}>
+                Open Log
+              </Button>
+            </Link>
           </CardActions>
         </Card>)
       })
@@ -250,7 +267,9 @@ const Home = (props) => {
     }
 
     return (
-          userData.user ?     //check if logged in
+          !userData.user ?     //check if not logged in
+            <h1>You need to be logged in to Access this page!</h1>
+          :
           <div className={root}>
             <div className={profilePaper}>
               <Paper elevation={1} className={classes.paperObject}>
@@ -289,8 +308,6 @@ const Home = (props) => {
               }
             </div>
           </div>
-          :
-          <h1>You need to be logged in to Access this page!</h1>
     )
 }
 
