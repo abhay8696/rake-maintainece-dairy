@@ -209,7 +209,7 @@ const Home = (props) => {
     }
     
     useEffect(async ()=>{
-      await loadProfile();
+      // await loadProfile();
       console.log('home page loaded + Profile')
     },[])
 
@@ -270,44 +270,7 @@ const Home = (props) => {
           !userData.user ?     //check if not logged in
             <h1>You need to be logged in to Access this page!</h1>
           :
-          <div className={root}>
-            <div className={profilePaper}>
-              <Paper elevation={1} className={classes.paperObject}>
-                <span className={classes.paperProperty}>Train Examiner</span>  
-                <span className={classes.paperValue}>{profileData.name}</span>
-              </Paper>
-              <Paper elevation={1} className={classes.paperObject}>
-                <span className={classes.paperProperty}>Designation</span> 
-                <span className={classes.paperValue}>{profileData.designation}</span>
-              </Paper>
-              <Paper elevation={1} className={classes.paperObject}>
-                <span className={classes.paperProperty}>Batch</span> 
-                <span className={classes.paperValue}>{profileData.batch}</span>
-              </Paper>
-              {/* <span className={classes.paperObject}>
-                <span className={classes.paperProperty}>Staff</span> 
-                <span className={classes.paperValue}>{profileData.staff}</span>
-              </span> */}
-              {/* <span className={singleLog}></span> */}
-            </div>
-            <Paper elevation={3} className={classes.createLog}>
-              <Link to='/LogForm'>
-                  <span>Create New Log</span> 
-                  <PostAddIcon />
-              </Link>
-            </Paper>
-            <div className={classes.allLogs}> 
-              {
-                profileData.logs.length > 0 ?
-                  displayLog()
-                :
-                  <div className={classes.noLogMsg}>
-                    <GridOffIcon />  
-                    <span>No Logs Added! </span>
-                  </div>
-              }
-            </div>
-          </div>
+          <h1>Slow Test 1</h1>
     )
 }
 
