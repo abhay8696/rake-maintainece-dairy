@@ -50,14 +50,26 @@ const useStyles = makeStyles((theme) => ({
       },
     },
     appTitle: {
+      position: 'absolute',
+      width: '100%',
+      height:'64px',
+      display: 'flex',
+      color: 'black',
+      justifyContent: 'center',
+      alignItems: 'center',
       fontWeight: 'bold',
-      backgroundColor: '',
+      // backgroundColor: 'grey',
       fontSize: '1.5rem',
       [theme.breakpoints.down('xs')]:{
-        fontSize: '1.2rem'
+        fontSize: '1.2rem',
+        height: '48px'
+      },
+      [theme.breakpoints.between('md', 'md')]:{
+        height:'76px',
       }
     },
     userButton:{
+      zIndex: '2',
       // display: 'flex',
       // alignItems: 'center',
       // justifyContent: 'space-between',
@@ -87,10 +99,7 @@ const useStyles = makeStyles((theme) => ({
         width: '15%',
         justifyContent: 'space-around'
       },
-      [theme.breakpoints.down('xs')]:{
-        
-
-      }
+      zIndex: '2',
     },
     date:{ 
       [theme.breakpoints.down('sm')]: {
@@ -144,9 +153,6 @@ const Navbar = () => {
                 </Button>
                 <span className={classes.date}>{currentDate}</span>
               </span>
-              <span className={classes.appTitle}>
-                Rake Maintenance Diary
-              </span>
               {/* <span className={classes.rightSide}> */}
                     <Button type="button"  className={classes.userButton} aria-controls="simple-menu" aria-haspopup="true" onClick={handleMenuOpen}>
                       {
@@ -178,6 +184,9 @@ const Navbar = () => {
                     </Menu>
               {/* </span> */}
             </div>
+              <span className={classes.appTitle}>
+                Rake Maintenance Diary
+              </span>
         </AppBar>
       </div>
     );

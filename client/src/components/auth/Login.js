@@ -140,7 +140,7 @@ const Login = () => {
             <Grid container>
               <Grid item>
                 <Link to='/register' variant="body2" className={classes.link}>
-                  {"Don't have an account? Sign up/ Register Here"}
+                  {"New User? Sign up/ Register Here"}
                 </Link>
               </Grid>
             </Grid>
