@@ -163,6 +163,9 @@ const useStyles = makeStyles((theme) => ({
       maxWidth:'15ch',
       margin: theme.spacing(1),
   },
+  brakeType:{
+    maxWidth:'133px'
+  },
   submit: {
     background: '#fbe8a6',
     maxWidth: '100px',

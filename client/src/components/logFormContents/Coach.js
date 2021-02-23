@@ -12,8 +12,6 @@ import CoachRow from './CoachRow'
 
 const useStyles = makeStyles((theme) => ({
   table: {
-    '& * >': {
-    },
   }
 }))
 

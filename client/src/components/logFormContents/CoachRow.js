@@ -23,18 +23,14 @@ import LoopIcon from '@material-ui/icons/Loop';
 
 const useRowStyles = makeStyles({
     root: {
-      '& > *': {
-      },
       borderBottom: '0px', 
       width: '100%',
-      // backgroundColor: 'skyblue'
     },
     cell: {
-      // backgroundColor: 'blue',
       '&:hover': {
         backgroundColor: '#d6d6d6'
       },
-      padding: '0px 0px',
+      padding: '0px',
       borderLeft: '1px solid #d6d6d6',
       borderRight: '1px solid #d6d6d6',
     },

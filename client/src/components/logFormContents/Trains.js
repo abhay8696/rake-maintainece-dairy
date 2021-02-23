@@ -264,7 +264,7 @@ const classes = useStyles(),
             <span className={classes.formTitle}>Add New Train</span>
             <form className={classes.form}>
                 <div className={classes.formArea}>
-                <div>
+                <div style={{maxWidth:'211px'}}>
                     <TextField
                     type= 'number'
                     variant="outlined"
@@ -279,7 +279,7 @@ const classes = useStyles(),
                     className={classes.boxes}
                     />
                 </div>
-                <div>
+                <div style={{maxWidth:'211px'}}>
                     <TextField
                     variant="outlined"
                     margin="normal"
@@ -294,7 +294,7 @@ const classes = useStyles(),
                     />
                 </div>
             
-                <div>
+                <div style={{maxWidth:'211px'}}>
                     
                     <TextField
                     type= 'number'
