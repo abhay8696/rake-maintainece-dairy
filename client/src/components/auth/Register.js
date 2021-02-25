@@ -43,6 +43,7 @@ const Register =()=> {
         [password, setPassword] = useState(''),
         [batch, setBatch] = useState(''),
         [designation, setDesignation] = useState(''),
+        [employeeId, setEmployeeId] = useState(''),
 
         handleNameChange = evt=> {
           setName(evt.target.value)
@@ -58,6 +59,9 @@ const Register =()=> {
         },
         handleDesignationChange = evt=> {
           setDesignation(evt.target.value)
+        },
+        handleEmployeeIdChange = evt=> {
+          setEmployeeId(evt.target.value)
         };
 
 
@@ -68,7 +72,8 @@ const Register =()=> {
       email: email,
       password: password,
       batch: batch,
-      designation: designation
+      designation: designation,
+      employeeId: employeeId,
     }
     console.log(JSON.stringify(body))
     await axios
@@ -129,18 +134,6 @@ const Register =()=> {
             margin="normal"
             required
             fullWidth
-            id="batch"
-            label="Batch Name"
-            name="batch"
-            autoComplete="Batch"
-            value={batch}
-            onChange={(evt)=>handleBatchChange(evt)}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
             id="designation"
             label="Designation"
             name="designation"
@@ -153,8 +146,33 @@ const Register =()=> {
             margin="normal"
             required
             fullWidth
+            type="Number"
+            id="employeeId"
+            label="Employee ID"
+            name="employeeId"
+            autoComplete="employeeId"
+            value={employeeId}
+            onChange={(evt)=>handleEmployeeIdChange(evt)}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="batch"
+            label="Batch Name"
+            name="batch"
+            autoComplete="Batch"
+            value={batch}
+            onChange={(evt)=>handleBatchChange(evt)}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
             name="password"
-            label="Password"
+            label="Set New Password"
             type="password"
             id="password"
             autoComplete="current-password"

@@ -17,7 +17,7 @@ router.get('/me', auth, async (req, res)=> {
         const profile = await Profile.findOne({ user: req.user.id })
             .populate(
                 'user',
-                ['name', 'email', 'batch', 'designation']
+                ['name', 'email', 'batch', 'designation', 'employeeId']
             )
             .populate({ //nested populate
                 path: 'logs',
@@ -90,6 +90,7 @@ router.post('/', auth, async (req, res)=> {
     let profileInfo = {
         user : req.user.id,
         name: user.name,
+        employeeId: user.employeeId,
         batch : batch,
         designation : designation,
         staff:staff

@@ -40,7 +40,8 @@ function App() {
     name: '',
     designation: '',
     batch: '',
-    logs: []
+    logs: [],
+    employeeId: undefined,
   })
   const [CurrentLog, setCurrentLog] = useState(undefined)
   const [CurrentTrain, setCurrentTrain] = useState(undefined)

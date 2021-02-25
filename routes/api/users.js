@@ -31,7 +31,7 @@ router.post('/',
         }
 
         
-        const { name, email, password, batch, designation} = req.body;
+        const { name, email, password, batch, designation, employeeId} = req.body;
 
         try{
             //see if user already exists
@@ -42,7 +42,7 @@ router.post('/',
 
             //create new user
             user = new User({
-                name,   email,  password, batch, designation
+                name,   email,  password, batch, designation, employeeId
             })
 
             
@@ -58,7 +58,8 @@ router.post('/',
                 user: user.id,
                 name: name,
                 batch: batch,
-                designation: designation
+                designation: designation,
+                employeeId: employeeId
             })
             await profile.save();
 

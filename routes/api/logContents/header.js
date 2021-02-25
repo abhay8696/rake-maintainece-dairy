@@ -16,7 +16,15 @@ router.get('/:headerID', auth, async (req, res)=> {
             return res.status(400).json({ msg: 'There is no header for this logID'})
         }
 
+        
+        let ddd = header.date
+        let arra = ddd.split("-").reverse().join('-')
+        // let arra2 = arra.reverse().join('-')
+        console.log(arra)
+        console.log(typeof(arra))
         res.json(header)
+        // res.json(arra)
+
     }catch(err){
         console.error(err.message);
         res.status(500).send('Server Error')
@@ -32,8 +40,13 @@ router.post('/', auth, async (req, res)=> {
     const user = await User.findById(req.user.id).select('-password');
     // res.json(user.name)
     const {Date, day, depot} = req.body;
+    //change format of date into DD-MM-YYYY
+    let newDate = Date.split("-").reverse().join('-')
+    console.log(newDate)
+
     
     const headerData = {
+        date: newDate,
         day : day,
         txr: user.name,
         depot: depot,

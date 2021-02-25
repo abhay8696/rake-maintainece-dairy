@@ -253,13 +253,6 @@ const classes = useStyles(),
     return (
     // <Container>
         <div className={classes.root} >
-        <div className={classes.AllTrains} style={{}}>
-            { IsAllTrainDataFound ? displayTrains() : <></> }
-            <div className={classes.fetchingIcon} style={{display: toggleFetchIcon}}>
-                {/* <span>Fetching Train</span> */}
-                <LinearProgress />
-            </div>
-        </div>
         <Paper elevation={3} className={classes.formPaper} onSubmit={(evt)=>SubmitTrain(evt)}>
             <span className={classes.formTitle}>Add New Train</span>
             <form className={classes.form}>
@@ -580,6 +573,13 @@ const classes = useStyles(),
                 </Alert>
               </Snackbar>
         </Paper>
+        <div className={classes.AllTrains} style={{}}>
+            { IsAllTrainDataFound ? displayTrains() : <></> }
+            <div className={classes.fetchingIcon} style={{display: toggleFetchIcon}}>
+                {/* <span>Fetching Train</span> */}
+                <LinearProgress />
+            </div>
+        </div>
         </div>
     // </Container>
     )

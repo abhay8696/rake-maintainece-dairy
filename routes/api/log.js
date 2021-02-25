@@ -56,12 +56,10 @@ router.get('/:logID', auth, async (req, res)=> {
 router.post('/', auth, async (req, res)=> {
     const user = await User.findById(req.user.id).select('-password');
 
-    const   d = new Date(),
-            getDate = d.getDate(),
-            getDay = d.getDay();
     // res.json(user.name)
     //headerData:
     const { date, day, depot} = req.body;
+    let newDate = date.split("-").reverse().join('-')
 
     //staffData:
     // const {underGear, brakePower, oiling, pipeFitting, carpentry, otherWorks} = req.body
@@ -73,7 +71,7 @@ router.post('/', auth, async (req, res)=> {
    
   
     const headerData = {
-        date: date,
+        date: newDate,
         day : day,
         txr: req.user.name,
         depot: depot,
@@ -138,6 +136,8 @@ router.post('/:logId', auth, async (req, res)=> {
     // res.json(user.name)
     //headerData:
     const {date, day, depot} = req.body;
+    // console.log(req.body)
+    let newDate = date.split("-").reverse().join('-')
 
     //staffData:
     const {underGear, brakePower, oiling, pipeFitting, carpentry, otherWorks} = req.body
@@ -149,7 +149,7 @@ router.post('/:logId', auth, async (req, res)=> {
 
 
     const headerData = {
-        date: date,
+        date: newDate,
         day : day,
         txr: user.name,
         depot: depot,
@@ -177,7 +177,7 @@ router.post('/:logId', auth, async (req, res)=> {
         //find header is present
         if(log.header[0]) {
             header = await Header.findOne({_id: log.header[0].id})
-            if(header) console.log('found')
+            if(header) console.log('log found')
             } else{header=null; console.log(header)}
 
         // if header is not present create new, else edit them

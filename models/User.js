@@ -20,6 +20,11 @@ const UserSchema = new mongoose.Schema({
     designation: {
         type: String
     },
+    //
+    employeeId: {
+        type: Number
+    },
+    //
     date: {
         type: Date,
         default: Date.now

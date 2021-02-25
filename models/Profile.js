@@ -15,6 +15,11 @@ const ProfileSchema = new mongoose.Schema({
     designation: {
         type: String
     },
+    //
+    employeeId: {
+        type: Number
+    },
+    //
     staff: {
         type: Object
     },

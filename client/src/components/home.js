@@ -198,7 +198,8 @@ const Home = (props) => {
           name : data.name,
           designation: data.designation,
           batch: data.batch,
-          logs: [...data.logs] 
+          logs: [...data.logs] ,
+          employeeId: data.employeeId
         })
       // }
 
@@ -281,6 +282,10 @@ const Home = (props) => {
                 <span className={classes.paperValue}>{profileData.designation}</span>
               </Paper>
               <Paper elevation={1} className={classes.paperObject}>
+                <span className={classes.paperProperty}>Employee ID</span> 
+                <span className={classes.paperValue}>{profileData.employeeId}</span>
+              </Paper>
+              <Paper elevation={1} className={classes.paperObject}>
                 <span className={classes.paperProperty}>Batch</span> 
                 <span className={classes.paperValue}>{profileData.batch}</span>
               </Paper>
@@ -290,13 +295,20 @@ const Home = (props) => {
               </span> */}
               {/* <span className={singleLog}></span> */}
             </div>
-            <Paper elevation={3} className={classes.createLog}>
-              <Link to='/LogForm'>
-                  <span>Create New Log</span> 
-                  <PostAddIcon />
-              </Link>
-            </Paper>
+            
             <div className={classes.allLogs}> 
+            <Card className={classes.card}>
+              <CardContent className={classes.cardRoot}>
+                <PostAddIcon />
+              </CardContent>
+              <CardActions className={classes.cardActions}>
+              <Link to='/LogForm' style={{textDecoration:'none'}}>
+                  <Button size="small" className={classes.openLogButton}>
+                  Create New Log
+                  </Button>
+                </Link>
+              </CardActions>
+            </Card>
               {
                 profileData.logs.length > 0 ?
                   displayLog()
