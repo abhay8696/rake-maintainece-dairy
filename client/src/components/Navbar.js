@@ -25,9 +25,10 @@ const useStyles = makeStyles((theme) => ({
       flexGrow: 1,
     },
     navbar: {
-      backgroundColor: "#f4976c",
+      // backgroundColor: "#f4976c", 
+      backgroundColor: "#071e3d", 
       boxShadow: 'none',
-      color: 'black',
+      color: 'white',
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     },
     allLogs: {
       textDecoration: 'none',
-      color: 'black',
+      color: 'white',
       display: 'flex',
       alignItems: 'center',
       // padding: theme.spacing(1),
@@ -54,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
       width: '100%',
       height:'64px',
       display: 'flex',
-      color: 'black',
+      color: 'white',
       justifyContent: 'center',
       alignItems: 'center',
       fontWeight: 'bold',
@@ -70,6 +71,7 @@ const useStyles = makeStyles((theme) => ({
     },
     userButton:{
       zIndex: '2',
+      color: 'white',
       // display: 'flex',
       // alignItems: 'center',
       // justifyContent: 'space-between',

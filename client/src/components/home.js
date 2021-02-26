@@ -8,6 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import PostAddIcon from '@material-ui/icons/PostAdd';
@@ -16,7 +17,7 @@ import GridOffIcon from '@material-ui/icons/GridOff';
 import axios from 'axios'
 import { Link, useHistory } from 'react-router-dom'
 
-const cardColors = ['#55c202', '#c20202', '#c26502', '#a2c202', '#0cc202', '#02afc2', '#c20242', '#c2b802']
+const cardColors = ['#000', '#55c202', '#c20202', '#c26502', '#a2c202', '#0cc202', '#02afc2', '#c20242', '#c2b802']
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -120,8 +121,27 @@ const useStyles = makeStyles((theme) => ({
     },
     boxShadow: '2px 2px 6px 0px rgba(50, 50, 50, 0.83)',
   },
+  addIcon:{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    // flexDirection:'column',
+    flexWrap: 'wrap',
+    // backgroundColor: 'red',
+    height: '80%',
+    width: '100%',
+  },
   cardRoot:{
-    padding: '2px 8px',
+    padding: '0px 0px',
+    backgroundColor: '#dee1ec'
+  },
+  iconCardRoot:{
+    height: '100%',
+    padding: '0px',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    // flexDirection: 'column',
   },
   bullet: {
     display: 'inline-block',
@@ -133,6 +153,19 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'baseline',
     justifyContent: 'space-between',
+    padding: '0px 4px'
+  },
+  dateDay:{
+    fontSize: 14,
+    display: 'flex',
+    alignItems: 'baseline',
+    justifyContent: 'space-between',
+    width: '100%',
+    padding: '4px 4px',
+    backgroundColor: '#eac100',
+    '& > *':{
+      color: '',
+    },
   },
   cardActions:{
     display: 'flex', 
@@ -145,6 +178,7 @@ const useStyles = makeStyles((theme) => ({
   },
   pos: {
     marginBottom: 12,
+    padding: '0px 4px'
   },
   noLogMsg:{
     width: '50%',
@@ -232,19 +266,17 @@ const Home = (props) => {
       let divArray = []
       let num = 0
       profileData.logs.map(log=>{
-        num === cardColors.length-1 ? num=0 : num++  //to generate font-color 
+        // num === cardColors.length-1 ? num=0 : num++  //to generate font-color 
         divArray.push(<Card className={classes.card}>
           <CardContent className={classes.cardRoot} style={{color: cardColors[num]}}>
-            <Typography className={classes.title} style={{color: cardColors[num]}} gutterBottom>
-              <span className={classes.dateDay}>
-                <Typography variant="h5" component="h2">
-                  {log.header[0].date}
-                </Typography>
-                <span>{log.header[0].day}</span>
-              </span>
-              <span>{log.header[0].depot}</span>
+            <Typography className={classes.dateDay} style={{color: cardColors[num]}} gutterBottom>
+              <Typography variant="h5" component="h2">
+                {log.header[0].date}
+              </Typography>
+              <span>{log.header[0].day}</span>
             </Typography>
             <Typography className={classes.pos} color="textSecondary">
+                <span>{log.header[0].depot}</span>
             </Typography>
               {
                 log.trains[0] ?  
@@ -298,16 +330,16 @@ const Home = (props) => {
             
             <div className={classes.allLogs}> 
             <Card className={classes.card}>
-              <CardContent className={classes.cardRoot}>
-                <PostAddIcon />
-              </CardContent>
-              <CardActions className={classes.cardActions}>
-              <Link to='/LogForm' style={{textDecoration:'none'}}>
-                  <Button size="small" className={classes.openLogButton}>
-                  Create New Log
-                  </Button>
+              <CardContent className={classes.iconCardRoot}>
+                <Typography variant="h1" component="h1" className={classes.addIcon}>
+                  <PostAddIcon fontSize="large"/>
+                </Typography>
+                <Link to='/LogForm' style={{textDecoration:'none'}}>
+                    <Button size="small" className={classes.openLogButton}>
+                      Create New Log
+                    </Button>
                 </Link>
-              </CardActions>
+              </CardContent>
             </Card>
               {
                 profileData.logs.length > 0 ?

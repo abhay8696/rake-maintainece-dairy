@@ -1,5 +1,6 @@
 .root {
-    background-color: #fbe8a6;
+    /* background-color: #fbe8a6; */
+    background-color: #21e6c1;
     height: 100vh;
     overflow: hidden;
     /* font-size: 10px; */
@@ -8,4 +9,5 @@
     width: 100%;
     height: 92%;
     display: flex;
+    /* color: 'white'; */
 }
