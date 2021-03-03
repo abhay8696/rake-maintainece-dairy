@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     borderRadius:'5px',
-    backgroundColor: 'white',
+    // backgroundColor: '#f3f169',
     margin: '4px 0px',
     padding: '8px',
     [theme.breakpoints.down('sm')]: {
@@ -112,6 +112,7 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 275,
     maxWidth: '500px',
     margin: '4px',
+    // backgroundColor:'#f3f169',
     [theme.breakpoints.up('lg')]: {
       // margin: '8px 22px',
     },
@@ -133,7 +134,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardRoot:{
     padding: '0px 0px',
-    backgroundColor: '#dee1ec'
+    // backgroundColor: 'black'
   },
   iconCardRoot:{
     height: '100%',
@@ -162,7 +163,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     width: '100%',
     padding: '4px 4px',
-    backgroundColor: '#eac100',
+    // backgroundColor: '#eac100',
     '& > *':{
       color: '',
     },
@@ -173,7 +174,7 @@ const useStyles = makeStyles((theme) => ({
   },
   openLogButton:{
     border: '1px soild grey',
-    backgroundColor: 'grey',
+    // backgroundColor: 'grey',
     borderRadius: '5px'
   },
   pos: {
@@ -289,7 +290,7 @@ const Home = (props) => {
           </CardContent>
           <CardActions className={classes.cardActions}>
             <Link to={{ pathname: "/Log", state: log }} style={{textDecoration:'none'}}>
-              <Button size="small" className={classes.openLogButton} style={{backgroundColor:cardColors[num]}}>
+              <Button size="small" variant="outlined" className={classes.openLogButton}>
                 Open Log
               </Button>
             </Link>
@@ -335,7 +336,7 @@ const Home = (props) => {
                   <PostAddIcon fontSize="large"/>
                 </Typography>
                 <Link to='/LogForm' style={{textDecoration:'none'}}>
-                    <Button size="small" className={classes.openLogButton}>
+                    <Button size="small" variant="outlined" className={classes.openLogButton}>
                       Create New Log
                     </Button>
                 </Link>
