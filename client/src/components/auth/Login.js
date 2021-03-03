@@ -18,6 +18,25 @@ import axios from 'axios'
 
 
 const useStyles = makeStyles((theme) => ({
+  root:{
+    backgroundColor:'',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    [theme.breakpoints.up('md')]:{
+      width:'100%',
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent:'space-between',
+      flexWrap: 'wrap',
+    },
+    '& > *':{
+      maxWidth: '412px',
+    },
+  },
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -83,14 +102,16 @@ const Login = () => {
     }
 
     return (
-      <Container component="main" maxWidth="xs">
-        <p className={classes.intro}>
-          Rake Maintenance Diary is a simple Web-App which stores everyday information
-          of trians and coaches which are maintained in depot.
-        </p>
-        <p className={classes.intro}> 
-          It's Digital. It's Online. It's Paperless!
-        </p>
+      <Container component="main" className={classes.root}>
+        <div className={classes.intro}>
+          <p>
+            Rake Maintenance Diary is a simple Web-App which stores information
+            of trians and coaches which are maintained in depot daily.
+          </p>
+          <p className={classes.intro}> 
+            It's Digital. It's Online. It's Paperless!
+          </p>
+        </div>
         <CssBaseline />
         <div className={classes.paper}>
           <LockIcon />
