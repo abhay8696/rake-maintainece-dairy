@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
       // width: theme.spacing(16),
       height: 'auto'
     },
-    maxWidth: '1280px',
+    maxWidth: '1200px',
     marginLeft: 'auto',
     marginRight: 'auto',
     [theme.breakpoints.down('sm')]:{
@@ -37,7 +37,8 @@ const useStyles = makeStyles((theme) => ({
     } 
   },
   profilePaper:{
-    // backgroundColor: '#303c6c',
+    // backgroundColor: 'inherit',
+    maxWidth: '1125px',
     // fontSize: '25px',
     // height: '250px',
     width: '100%',
@@ -54,6 +55,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius:'5px',
     // backgroundColor: '#f3f169',
     margin: '4px 0px',
+    [theme.breakpoints.between('sm','md')]: {
+      maxWidth: '50%'
+    },
     padding: '8px',
     [theme.breakpoints.down('sm')]: {
         width: '100%'
@@ -305,43 +309,37 @@ const Home = (props) => {
             <h1>You need to be logged in to Access this page!</h1>
           :
           <div className={root}>
-            <div className={profilePaper}>
-              <Paper elevation={1} className={classes.paperObject}>
+            <Paper elevation={1} className={profilePaper}>
+              <div className={classes.paperObject}>
                 <span className={classes.paperProperty}>Train Examiner</span>  
                 <span className={classes.paperValue}>{profileData.name}</span>
-              </Paper>
-              <Paper elevation={1} className={classes.paperObject}>
+              </div>
+              <div className={classes.paperObject}>
                 <span className={classes.paperProperty}>Designation</span> 
                 <span className={classes.paperValue}>{profileData.designation}</span>
-              </Paper>
-              <Paper elevation={1} className={classes.paperObject}>
+              </div>
+              <div className={classes.paperObject}>
                 <span className={classes.paperProperty}>Employee ID</span> 
                 <span className={classes.paperValue}>{profileData.employeeId}</span>
-              </Paper>
-              <Paper elevation={1} className={classes.paperObject}>
+              </div>
+              <div className={classes.paperObject}>
                 <span className={classes.paperProperty}>Batch</span> 
                 <span className={classes.paperValue}>{profileData.batch}</span>
-              </Paper>
+              </div>
               {/* <span className={classes.paperObject}>
                 <span className={classes.paperProperty}>Staff</span> 
                 <span className={classes.paperValue}>{profileData.staff}</span>
               </span> */}
               {/* <span className={singleLog}></span> */}
-            </div>
-            
-            <div className={classes.allLogs}> 
-            <Card className={classes.card}>
-              <CardContent className={classes.iconCardRoot}>
-                <Typography variant="h1" component="h1" className={classes.addIcon}>
-                  <PostAddIcon fontSize="large"/>
-                </Typography>
+            </Paper>
                 <Link to='/LogForm' style={{textDecoration:'none'}}>
                     <Button size="small" variant="outlined" className={classes.openLogButton}>
                       Create New Log
+                      <PostAddIcon fontSize="large"/>
                     </Button>
                 </Link>
-              </CardContent>
-            </Card>
+            
+            <div className={classes.allLogs}> 
               {
                 profileData.logs.length > 0 ?
                   displayLog()
