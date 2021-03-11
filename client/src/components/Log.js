@@ -78,7 +78,6 @@ const Log = (props) => {
                     />
                     <br/>
                     <div>
-                        <p>Train Information</p>
                         {
                             displayTrains()
                         }

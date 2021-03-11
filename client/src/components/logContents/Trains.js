@@ -100,8 +100,8 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     property: {
-        // backgroundColor: 'red'
-        color: '#636363',
+        // backgroundColor: 'red',
+        fontWeight: 'bold',
         [theme.breakpoints.down('sm')]: {
             marginRight: '4px'
         }
@@ -135,12 +135,17 @@ const useStyles = makeStyles((theme) => ({
             // flexWrap: 'wrap',
             alignItems: 'baseline',
             [theme.breakpoints.down('sm')]:{
-                maxWidth: '100px',
+                // maxWidth: '100px',
             },
         },
         [theme.breakpoints.up('md')]:{
             width: '90%',
         },
+    },
+    pitNloadSM:{
+        [theme.breakpoints.down('sm')]:{
+            display: 'none'
+        }
     },
     coachIcon:{
         display: 'flex',
@@ -169,6 +174,16 @@ const useStyles = makeStyles((theme) => ({
         alignSelf: 'center',
         width: '75%',
       },
+    },
+    trainName:{
+        [theme.breakpoints.down('sm')]:{
+            width: '60%',   
+        },
+    },
+    trainNo:{
+        [theme.breakpoints.down('sm')]:{
+            width: '40%',   
+        },
     },
   }));
 
@@ -239,19 +254,19 @@ const Train = (props) => {
                 className={classes.accordionSummary}
                 >
                     <div className={classes.AccordionSummaryBody}>
-                    <div>
-                        <span className={classes.property}>No</span>
+                    <div className={classes.trainNo}>
+                        <span className={classes.property}>Train No</span>
                         <span className={classes.value}>{trainNo}</span>
                     </div>
-                    <div>
-                        <span className={classes.property}>Name</span>
+                    <div className={classes.trainName}>
+                        <span className={classes.property}>Train Name</span>
                         <span className={classes.value}>{trainName}</span>
                     </div>
-                    <div>
+                    <div className={classes.pitNloadSM}>
                         <span className={classes.property}>Pit</span>
                         <span className={classes.value}>{pitlineNo}</span>
                     </div>
-                    <div>
+                    <div className={classes.pitNloadSM}>
                         <span className={classes.property}>Load</span>
                         <span className={classes.value}>{load}</span>
                     </div>
@@ -272,10 +287,10 @@ const Train = (props) => {
                                     <span className={classes.property}>Brake Type</span>
                                     <span className={classes.value}>{brakeType}</span>
                                 </div>
-                                <div className={classes.pitNloadSM}>
+                                <div>
                                     <span className={classes.property}>Pit No</span>
                                     <span className={classes.value}>{pitlineNo}</span></div>
-                                <div className={classes.pitNloadSM}>
+                                <div>
                                     <span className={classes.property}>Load</span>
                                     <span className={classes.value}>{load}</span></div>
                                 {/* className={classes.property} <div>Pit No<span className={classes.value}>{pitlineNo}</span></div> */}
