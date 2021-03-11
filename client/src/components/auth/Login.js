@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import UserContext from '../../context/UserContext'
 import axios from 'axios'
+import iconsArray from '../../icons/iconsArray'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -60,8 +61,11 @@ const useStyles = makeStyles((theme) => ({
     color: 'black'
   },
   intro: {
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
+  introTagline:{
+    fontSize: '1.5rem'
+  },
 }));
 
 const Login = () => {
@@ -108,9 +112,10 @@ const Login = () => {
             Rake Maintenance Diary is a simple Web-App which stores information
             of trians and coaches which are maintained in depot daily.
           </p>
-          <p className={classes.intro}> 
+          <p className={classes.introTagline}> 
             It's Digital. It's Online. It's Paperless!
           </p>
+          {iconsArray}
         </div>
         <CssBaseline />
         <div className={classes.paper}>

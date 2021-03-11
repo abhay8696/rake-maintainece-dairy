@@ -79,6 +79,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paperProperty:{
     margin: '0px',
+    fontWeight: 'bold',
   },
   paperValue: {
     fontSize: '1.5rem',
@@ -86,7 +87,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     [theme.breakpoints.down('sm')]: {
       fontSize: '1rem',
-      fontWeight: 'bold',
     },
   },
   strengthPaperBody:{
@@ -119,11 +119,34 @@ const useStyles = makeStyles((theme) => ({
     }
     // maxWidth: '500px'
   },
-  strengthProperty:{},
+  strengthProperty:{
+    fontWeight: 'bold',
+  },
   strengthValue:{
-    fontSize: '2rem',
+    fontSize: '1.5rem',
     margin: '4px 0',
     display: 'flex',
+  },
+  phyPre:{
+    width: '255px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    // backgroundColor: 'red',
+    margin: '0px 0px',
+    padding: '8px',
+    [theme.breakpoints.down('sm')]: {
+        minWidth: '25%',
+        maxWidth: '28%',
+        marginRight: '50px'
+    },
+    borderRight: '1px solid #a19f9f',
+    borderBottom: '1px solid #a19f9f',
+    borderRadius: '5px',
+    '& > *': {
+      margin: '0px 8px'
+    }
+    // maxWidth: '500px'
   },
   }));
 
@@ -153,8 +176,16 @@ const Staff = (props) => {
         displayStrength = ()=> {
           const array = []
           for(let i = 0; i<strength1.length; i++){
+            i!==1 ? 
             array.push(
               <div className={classes.strengthObject}>
+                <span className={classes.strengthProperty}>{strength1[i]}</span> 
+                <span className={classes.strengthValue}>{eval(`${strength2[i]}`)}</span>
+              </div>
+            )
+            :
+            array.push(
+              <div className={classes.phyPre}>
                 <span className={classes.strengthProperty}>{strength1[i]}</span> 
                 <span className={classes.strengthValue}>{eval(`${strength2[i]}`)}</span>
               </div>
