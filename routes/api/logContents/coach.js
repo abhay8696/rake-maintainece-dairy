@@ -38,7 +38,7 @@ router.post('/:logId/:trainId', auth, async (req, res)=> {
         coachCode, mechCode, returnDate, 
         angleCock, underGearWorks, pipeLineWorks, 
         carpentryWorks, airBrakeWorks, pohStation, pohDate,
-        iohStation, iohDate
+        iohStation, iohDate, schedule
     } = req.body;
 
     const coachData = {
@@ -59,6 +59,7 @@ router.post('/:logId/:trainId', auth, async (req, res)=> {
         pohDate: pohDate,
         iohStation: iohStation,
         iohDate: iohDate,
+        schedule: schedule
     }
     try{
         //check for log and train

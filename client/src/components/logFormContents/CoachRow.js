@@ -16,6 +16,9 @@ import Typography from '@material-ui/core/Typography';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Button from '@material-ui/core/Button';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
@@ -95,13 +98,13 @@ const CoachRow = (props)=> {
       'returnDate', 'pohStation', 'pohDate', 'iohStation', 
       'iohDate', 'angleCock'
     ]
-    const workNames = ['underGearWorks', 'pipeLineWorks', 'carpentryWorks', 'airBrakeWorks']
+    const workNames = ['underGearWorks', 'pipeLineWorks', 'carpentryWorks', 'airBrakeWorks', 'schedules']
     
     const [displayUploadIcon, setDisplayUploadIcon] = useState('block')
     const [displayLoopIcon, setDisplayLoopIcon] = useState('none')
     const [displayCheckIcon, setDisplayCheckIcon] = useState('none')
     const [borderBottom, setborderBottom] = useState('grey')
-
+    const [scheduleButton, setscheduleButton] = useState('')
     const [coachData, setCoachData] = useState([{
       serialNo: serialNo,
       owningRailway: 'CR',
@@ -149,6 +152,9 @@ const CoachRow = (props)=> {
       console.log(evt.target.name)
       console.log(evt.target.value)
     }
+    const handleScheduleChange = (event) => {
+      setscheduleButton(event.target.value);
+    };
 
     const body = {
       serialNo: coachData[0].serialNo,
@@ -221,6 +227,7 @@ const CoachRow = (props)=> {
     const displayWorksCells = ()=> {
       const array = [];
       for(let i=0; i<workNames.length; i++){
+        i !==4 ?
         array.push(
           <TableCell align="left" className={classes.cell}>
             <textarea 
@@ -230,6 +237,15 @@ const CoachRow = (props)=> {
               className={classes.worksCellInput}
               style={{width: '100%',}}
             />
+          </TableCell>)
+        :
+        array.push(
+          <TableCell align="inline" className={classes.cell}>
+          <RadioGroup aria-label="schedule" name="schedule" value={scheduleButton} onChange={handleScheduleChange}>
+            <FormControlLabel value="A" control={<Radio />} label="A" />
+            <FormControlLabel value="B" control={<Radio />} label="B" />
+            <FormControlLabel value="" control={<Radio />} label="None" />
+          </RadioGroup>
           </TableCell>)
       }
       return array;
@@ -292,6 +308,7 @@ const CoachRow = (props)=> {
                       <TableCell align="center">Pipeline Works</TableCell>
                       <TableCell align="center">Carpentry Works</TableCell>
                       <TableCell align="center">Air Brake Works</TableCell>
+                      <TableCell align="center">Schedules</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>

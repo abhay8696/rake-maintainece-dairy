@@ -55,6 +55,9 @@ const CoachSchema = new mongoose.Schema({
     airBrakeWorks: {
         type: String
     },
+    schedule: {
+        type: String
+    },
 })
 
 

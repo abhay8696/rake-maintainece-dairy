@@ -165,7 +165,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'baseline',
     justifyContent: 'space-between',
-    width: '100%',
     padding: '4px 4px',
     // backgroundColor: '#eac100',
     '& > *':{

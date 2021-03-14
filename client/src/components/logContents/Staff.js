@@ -109,7 +109,7 @@ const useStyles = makeStyles((theme) => ({
     padding: '8px',
     [theme.breakpoints.down('sm')]: {
         minWidth: '25%',
-        maxWidth: '28%',
+        maxWidth: '50%',
     },
     borderRight: '1px solid #a19f9f',
     borderBottom: '1px solid #a19f9f',
@@ -128,7 +128,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   phyPre:{
-    width: '255px',
+    width: '50px',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -176,16 +176,8 @@ const Staff = (props) => {
         displayStrength = ()=> {
           const array = []
           for(let i = 0; i<strength1.length; i++){
-            i!==1 ? 
             array.push(
               <div className={classes.strengthObject}>
-                <span className={classes.strengthProperty}>{strength1[i]}</span> 
-                <span className={classes.strengthValue}>{eval(`${strength2[i]}`)}</span>
-              </div>
-            )
-            :
-            array.push(
-              <div className={classes.phyPre}>
                 <span className={classes.strengthProperty}>{strength1[i]}</span> 
                 <span className={classes.strengthValue}>{eval(`${strength2[i]}`)}</span>
               </div>
