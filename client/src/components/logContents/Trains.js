@@ -76,21 +76,23 @@ const useStyles = makeStyles((theme) => ({
     accordDivDetails:{
         // backgroundColor: 'blue',
         display: 'flex',
-        // flexDirection: 'column',
+        flexWrap: 'wrap',
         flexShrink: '1',
         margin: '4px 0',
         '& > *': {
             display: 'flex',
             // flexDirection: 'column',
             alignItems: 'center',
+            justifyContent: 'space-between',
             margin: '4px',
-            // backgroundColor: 'blue'
+            paddingRight: '4px',
         },
         [theme.breakpoints.down('sm')]:{
             '& > *': {
-                flexDirection: 'column',
+                // flexDirection: 'column',
+                width: '45%'
             },
-            justifyContent: 'space-around'
+            justifyContent: 'space-between',
         },
         [theme.breakpoints.up('md')]:{
             flexDirection: 'column',
@@ -101,7 +103,7 @@ const useStyles = makeStyles((theme) => ({
     },
     property: {
         // backgroundColor: 'red',
-        fontWeight: 'bold',
+        // fontWeight: 'bold',
         [theme.breakpoints.down('sm')]: {
             marginRight: '4px'
         }
@@ -109,12 +111,19 @@ const useStyles = makeStyles((theme) => ({
     pressureDivs:{
         display: 'flex',
         flexDirection: 'column',
-        height: '100px'
+        // height: '100px',
+        [theme.breakpoints.down('sm')]:{
+            // backgroundColor: 'teal',
+            alignItems: 'flex-start',
+            '& > *':{
+                margin: 'auto 0px'
+            },
+        },
     },
     frontRear:{
         // backgroundColor: 'red',
-        // marginRight: '8px'
-        marginLeft: theme.spacing(1), 
+        marginRight: '8px',
+        // marginLeft: theme.spacing(1), 
     },
     value: {
         borderRadius: '5px',

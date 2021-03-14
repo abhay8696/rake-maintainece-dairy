@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
       marginLeft:'auto',
       marginRight:'auto',
       alignSelf: 'center',
-      width: '75%',
+      width: '80%',
     },
   },
   paperObject:{
@@ -123,7 +123,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
   },
   strengthValue:{
-    fontSize: '1.5rem',
+    fontSize: '1.2rem',
     margin: '4px 0',
     display: 'flex',
   },
