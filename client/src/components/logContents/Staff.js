@@ -109,7 +109,7 @@ const useStyles = makeStyles((theme) => ({
     padding: '8px',
     [theme.breakpoints.down('sm')]: {
         minWidth: '25%',
-        maxWidth: '50%',
+        maxWidth: '45%',
     },
     borderRight: '1px solid #a19f9f',
     borderBottom: '1px solid #a19f9f',
