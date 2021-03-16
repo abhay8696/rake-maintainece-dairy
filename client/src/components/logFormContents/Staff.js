@@ -21,10 +21,10 @@ const classes = useStyles(),
     { userData, setUserData } = useContext(UserContext),
     token = userData.token,
     worksArray = ['Undergear' , 'Air Brake Testing', 'Pipe Fitting', 'Carpentry', 'DPO and SBO', 'Other Works'],
-    totalSacntionedStrength = ['On Roll', 'Present', 'Under Rest', 'On Leave', 'Absent', 'Sick'],
-    strength = ['onRoll', 'physicallyPresent', 'underRest', 'onLeave', 'absent', 'sick'],
+    totalSacntionedStrength = ['On Roll', 'Present', 'On Leave', 'Absent', 'Sick', 'Under Rest'],
+    strength = ['onRoll', 'physicallyPresent', 'onLeave', 'absent', 'sick', 'underRest'],
     idNameAuto = ['Undergear' , 'Testing', 'PipeFitting', 'Carpentry', 'DPOandSBO', 'OtherWorks'],
-    idNameAuto2= ['onRoll', 'physicallyPresent', 'underRest', 'onLeave', 'absent', 'sick'],
+    idNameAuto2= ['onRoll', 'physicallyPresent', 'onLeave', 'absent', 'sick', 'underRest'],
 
     
     [snackbarState, setsnackbarState] = React.useState({
@@ -144,7 +144,7 @@ const classes = useStyles(),
         
         for(let i=0; i<worksArray.length; i++){
             stringthDiv.push(<div>
-                {totalSacntionedStrength[i]}
+                <span className={classes.strengthProperty}>{totalSacntionedStrength[i]}</span>
                 <TextField
                 type='number'
                 variant="outlined"
@@ -165,7 +165,7 @@ const classes = useStyles(),
     
     return (
         <Paper elevation={3} className={classes.staffRoot}>
-            <span className={classes.formTitle}>Staff Position and Strength</span>
+            <span className={classes.formTitle}>Staff Position</span>
             <form className={classes.form} onSubmit={(evt)=>hanldeSubmit(evt)}>
                 <div className={classes.staffFormArea}>
                     <div className={classes.names}>
@@ -173,12 +173,12 @@ const classes = useStyles(),
                         {workDivs()}
                     </div>
                     <hr className={classes.hr}/>
-                    <span style={{width: '100%', fontSize: '1.2rem',}}>Total Sanctioned Strength</span>
+                    <span className={classes.formTitle}>Total Sanctioned Strength</span>
                     <div className={classes.strength}>
                         {strengthDivs()}
                     </div>
                 </div>
-                <Button type='submit' onClick={handleClick()} className={classes.submit}>Save</Button>
+                <Button type='submit' variant="outlined"  onClick={handleClick()} className={classes.submit}>Save</Button>
             </form>
               <Snackbar 
                 anchorOrigin={{ vertical, horizontal }}

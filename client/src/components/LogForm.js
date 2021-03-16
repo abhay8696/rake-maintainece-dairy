@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import Header from './logFormContents/Header'
 import Staff from './logFormContents/Staff'
+import scrollToElement  from 'scroll-to-element'
 
 import Button from '@material-ui/core/Button';
 import TrainIcon from '@material-ui/icons/Train';
@@ -48,13 +49,23 @@ const LogForm = () => {
         setdisableStaffAndTrain(false)
         console.log('clicked')
     }
+const scroll = ()=> {
+    console.log('Scrolled')
+    scrollToElement('.staff', {
+        offset: 0,
+        ease: 'out-bounce',
+        duration: 1500
+    })
+}
     return (
         <div className={classes.root}>
-            <Header enableStaffAndTrain={()=>enableStaffAndTrain()}/>
+            <Header enableStaffAndTrain={()=>enableStaffAndTrain()} scroll={scroll}/>
             {
                 disableStaffAndTrain ?  <></>    :
             <div className={classes.staffAndTrain}>
+                <div id="staff">
                 <Staff/>
+                </div>
                 <Button 
                     className={classes.addTrain} 
                     onClick={()=> {

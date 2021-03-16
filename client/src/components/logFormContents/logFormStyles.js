@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignSelf: 'center',
-        width: '50%',
+        width: '90%',
       },
     },
     form: {
@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
     submit: {
-      background: '#fbe8a6',
+      background: 'skyblue',
       maxWidth: '100px',
       display: 'flex',
       justifyContent: 'center',
@@ -90,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: '5px',
       cursor: 'pointer',
       '&:hover': {
-        background: '#f4976c'
+        // background: 'red'
       }
     },
     dutyHours:{
@@ -151,7 +151,7 @@ const useStyles = makeStyles((theme) => ({
     strength: {
       display: 'flex',
       flexWrap: 'wrap',
-      justifyContent: 'space-around',
+      justifyContent: 'space-between',
       width: '100%',
       '& > *': {
         maxWidth: '10%',
@@ -159,10 +159,12 @@ const useStyles = makeStyles((theme) => ({
       },
       [theme.breakpoints.down('md')]: {
         '& > *': {
-          maxWidth: '20%',
+          maxWidth: '25%',
           marginLeft: theme.spacing(1),
         },
       },
+    },
+    strengthProperty:{
     },
     AllTrains:{
       color: 'red',

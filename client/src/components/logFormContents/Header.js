@@ -21,7 +21,7 @@ function Alert(props) {
 
 
 const Header = (props) => {
-  const { enableStaffAndTrain } = props;
+  const { enableStaffAndTrain, scroll } = props;
   const { userData, setUserData } = useContext(UserContext)
   const { CurrentLog, setCurrentLog} = useContext(CurrentLogContext)
   const token = userData.token
@@ -83,6 +83,7 @@ const Header = (props) => {
       enableStaffAndTrain();
       // console.log(evt)
       sendData()
+      scroll()
     }
 
     const sendData = async ()=> {
