@@ -46,8 +46,10 @@ const Log = (props) => {
     const display = ()=> {
         console.log(logData.trains[1])
         const {date, day, depot } = logData.header[0]
-        const {brakePower, carpentry, oiling, otherWorks, pipeFitting, underGear} = logData.staff[0];
-        
+        if(logData.staff[0]){
+            var {brakePower, carpentry, oiling, otherWorks, pipeFitting, underGear} = logData.staff[0];
+        }
+        console.log(logData.staff[0])
         const displayTrains = ()=> {
             const trainArray =[]
             logData.trains.map(train=> {
@@ -67,7 +69,9 @@ const Log = (props) => {
                         to      = {logData.header[0].dutyHrs.to}
                     />
 
-                    <Staff
+                    {
+                        logData.staff[0] ?
+                        <Staff
                         testing     = {brakePower}
                         carpentry   = {carpentry}
                         oiling      = {oiling}
@@ -75,13 +79,18 @@ const Log = (props) => {
                         pipeFitting = {pipeFitting}
                         logData    = {logData}
                         underGear   = {underGear}
-                    />
+                        />
+                        :
+                        <h3>Staff data not available</h3>
+                    }
                     <br/>
-                    <div>
-                        {
-                            displayTrains()
-                        }
-                    </div>
+                    {
+                    logData.trains[0] ? 
+                        <div>
+                            {displayTrains()}
+                        </div>
+                        : <h3>Train data not available</h3>
+                    }
                 </div >
         // return <h1>asdad</h1>
     }
