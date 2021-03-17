@@ -42,7 +42,8 @@ const useStyles = makeStyles((theme) => ({
             marginLeft: '128px',
         },
         [theme.breakpoints.down('sm')]:{
-            // marginLeft: '16px',
+            marginRight: '16px',
+            backgroundColor: 'red'
         },
     },
     accordionDetails: {
@@ -78,26 +79,61 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold'
     },
     accordDivDetails:{
-        // backgroundColor: 'blue'
+        // backgroundColor: 'blue',
         display: 'flex',
-        // flexWrap: 'wrap',
+        flexWrap: 'wrap',
         justifyContent: 'space-around',
+        [theme.breakpoints.down('sm')]:{
+            justifyContent: 'space-between',
+        },
         flexShrink: '1',
         margin: '4px 0',
         '& > *': {
             display: 'flex',
-            flexDirection: 'column',
             alignItems: 'baseline',
             margin: '4px',
-            // backgroundColor: 'blue'
-        }
+        },
+    },
+    accordDivDetailsObjects:{
+        // backgroundColor: 'teal',
+        [theme.breakpoints.down('sm')]:{
+            width: '45%',
+            display: 'flex',
+            justifyContent: 'space-between',
+            '& > :nth-child(2)': {
+                marginRight: '16px',
+            },
+        },
+    },
+    sickDivObject:{
+        [theme.breakpoints.down('sm')]:{
+            width: '90%',
+            display: 'flex',
+            justifyContent: 'space-between'
+        },
+    },
+    pressureDivs:{
+        display: 'flex',
+        flexDirection: 'column',
+        // height: '100px',
+        [theme.breakpoints.down('sm')]:{
+            // backgroundColor: 'teal',
+            alignItems: 'flex-start',
+            '& > *':{
+                margin: 'auto 0px'
+            },
+            '& > :nth-child(1)': {
+                marginBottom: '4px',
+            },
+        },
     },
     property: {
         // backgroundColor: 'red'
         color: '#636363',
         [theme.breakpoints.down('sm')]: {
             marginRight: '4px'
-        }
+        },
+        fontWeight: 'bold',
     },
     frontRear:{
         // backgroundColor: 'red',
@@ -115,7 +151,7 @@ const useStyles = makeStyles((theme) => ({
     },
     AccordionSummaryBody: {
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         width: '100%',
         '& > *': {
@@ -123,7 +159,8 @@ const useStyles = makeStyles((theme) => ({
             flexWrap: 'wrap',
             alignItems: 'baseline',
             [theme.breakpoints.down('sm')]:{
-                maxWidth: '100px',
+                // maxWidth: '100px',
+                marginRight: '8px'
             },
         },
         [theme.breakpoints.up('md')]:{
@@ -177,6 +214,11 @@ const useStyles = makeStyles((theme) => ({
             width: '10%'
         },
     },
+    pitNloadSM:{
+        [theme.breakpoints.down('sm')]:{
+            display: 'none'
+        }
+    },
   }));
 
 const Train = (props) => {
@@ -219,7 +261,7 @@ const Train = (props) => {
             for(let i = 0; i < works.length; i++){
                 if(evalVariable('data.washingAndCleaning', works[i])){
                     array.push(
-                        <div>
+                        <div className={classes.accordDivDetailsObjects}>
                             <span>{worksNames[i]}</span>
                             <Checkbox
                                 checked={evalVariable('data.washingAndCleaning', works[i])}
@@ -252,11 +294,11 @@ const Train = (props) => {
                         <span className={classes.property}>Train Name</span>
                         <span className={classes.value}>{trainName}</span>
                     </div>
-                    <div>
+                    <div className={classes.pitNloadSM}>
                         <span className={classes.property}>Pit No</span>
                         <span className={classes.value}>{pitlineNo}</span>
                     </div>
-                    <div>
+                    <div className={classes.pitNloadSM}>
                         <span className={classes.property}>Load</span>
                         <span className={classes.value}>{load}</span>
                     </div>
@@ -272,22 +314,22 @@ const Train = (props) => {
                         <div className={classes.accordDivs}>
                             <span className={classes.accordDivTitles}>Formation</span>
                             <div className={classes.accordDivDetails}>
-                                <div>
+                                <div className={classes.accordDivDetailsObjects}>
                                     <span className={classes.property}>Memo No</span>
                                     <span className={classes.value}>{memoNo}</span></div>
-                                <div>
-                                    <span className={classes.property}>Time Received</span>
-                                    <span className={classes.value}>{timeRecieved}</span></div>
-                                <div>
+                                <div className={classes.accordDivDetailsObjects}>
                                     <span className={classes.property}>Brake Type</span>
                                     <span className={classes.value}>{brakeType}</span>
                                 </div>
-                                <div className={classes.pitNloadSM}>
+                                <div className={classes.accordDivDetailsObjects}>
                                     <span className={classes.property}>Pit No</span>
                                     <span className={classes.value}>{pitlineNo}</span></div>
-                                <div className={classes.pitNloadSM}>
+                                <div className={classes.accordDivDetailsObjects}>
                                     <span className={classes.property}>Load</span>
                                     <span className={classes.value}>{load}</span></div>
+                                <div className={classes.accordDivDetailsObjects}>
+                                    <span className={classes.property}>Time Received</span>
+                                    <span className={classes.value}>{timeRecieved}</span></div>
                                 {/* className={classes.property} <div>Pit No<span className={classes.value}>{pitlineNo}</span></div> */}
                             </div>
                         </div>
@@ -295,11 +337,11 @@ const Train = (props) => {
                         <div className={classes.accordDivs}> 
                             <span className={classes.accordDivTitles}>Protection Of Rake</span>
                             <div className={classes.accordDivDetails}>
-                                <div>
+                                <div className={classes.accordDivDetailsObjects}>
                                     <span className={classes.property}>Line Blocking Time</span>
                                     <span className={classes.value}>{lineBlockingTime}</span>
                                 </div>
-                                <div>
+                                <div className={classes.accordDivDetailsObjects}>
                                     <span className={classes.property}>Line Release Time</span>
                                     <span className={classes.value}>{lineReleaseTime}</span>
                                 </div>
@@ -309,7 +351,7 @@ const Train = (props) => {
                         <div className={classes.accordDivs}>
                             <span className={classes.accordDivTitles}>Pressure</span>
                             <div className={classes.accordDivDetails}>
-                                <div className={classes.bp}>
+                                <div className={classes.pressureDivs}>
                                     <span className={classes.property}>Brake Pipe</span>
                                     <div>
                                         <span className={classes.frontRear}>Front:</span>
@@ -320,7 +362,7 @@ const Train = (props) => {
                                         <span className={classes.value}>{data.pressure.bp.rear}</span>
                                     </div>
                                 </div>
-                                <div className={classes.fp}>
+                                <div className={classes.pressureDivs}>
                                     <span className={classes.property}>Feed Pipe</span>
                                     <div>
                                         <span className={classes.frontRear}>Front:</span>
@@ -337,15 +379,15 @@ const Train = (props) => {
                         <div className={classes.accordDivs}>
                             <span className={classes.accordDivTitles}>Sick Data</span>
                             <div className={classes.accordDivDetails}>
-                                <div>
+                                <div className={classes.sickDivObject}>
                                     <span className={classes.property}>Time Unfit Memo Issued</span>
                                     <span className={classes.value}>{timeUnfitMemoIssued}</span>
                                 </div>
-                                <div>
+                                <div className={classes.sickDivObject}>
                                     <span className={classes.property}>Time Replacement Provided</span>
                                     <span className={classes.value}>{timeReplacementProvided}</span>
                                 </div>
-                                <div>
+                                <div className={classes.sickDivObject}>
                                     <span className={classes.property}>Remarks</span>
                                     <span className={classes.value}>{remarks}</span>
                                 </div>
