@@ -103,19 +103,23 @@ const classes = useStyles(),
         remarks: TrainData.remarks
     },
 
-    [open, setOpen] = useState(false),
+    [snackbarState, setsnackbarState] = React.useState({
+        snackBarOpen: false,
+        vertical: 'top',
+        horizontal: 'center',
+      }),
+      { snackBarOpen, vertical, horizontal } = snackbarState,
 
-    handleClick = () => {
-      setOpen(true);
-    },
-
-    handleClose = (event, reason) => {
-      if (reason === 'clickaway') {
-        return;
-      }
-
-      setOpen(false);
-    },
+      handleClick = (newState) => () => {
+        setsnackbarState({ snackBarOpen: true, vertical: 'top', horizontal: 'center'});  
+      },
+  
+      handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setsnackbarState({ ...snackbarState, snackBarOpen: false });
+      },
     
     handleTrainDataChange = (evt)=> {
         setTrainData({
@@ -560,13 +564,15 @@ const classes = useStyles(),
                 </div>
                 
             </div>
-                <Button type='submit' onClick={handleClick} className={classes.submit}>Save</Button>
+                <Button type='submit' onClick={handleClick()} className={classes.submit}>Save</Button>
             </form>
               <Snackbar 
-                open={open} 
-                autoHideDuration={5000} 
+                anchorOrigin={{ vertical, horizontal }}
+                open={snackBarOpen} 
+                autoHideDuration={2000} 
                 onClose={handleClose}
-                style={{width: '350px'}}
+                // style={{width: '350px', marginTop: '55px'}}
+                key={vertical + horizontal}
                 >
                 <Alert onClose={handleClose} severity="success">
                   New Train Created. You can now add Coaches to it.

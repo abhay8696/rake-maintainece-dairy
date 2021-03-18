@@ -43,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
         },
         [theme.breakpoints.down('sm')]:{
             marginRight: '16px',
-            backgroundColor: 'red'
         },
     },
     accordionDetails: {

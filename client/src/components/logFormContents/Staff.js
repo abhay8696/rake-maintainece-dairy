@@ -185,7 +185,7 @@ const classes = useStyles(),
                 open={snackBarOpen} 
                 autoHideDuration={2000} 
                 onClose={handleClose}
-                style={{width: '350px', marginTop: '55px'}}
+                // style={{width: '350px', marginTop: '55px'}}
                 key={vertical + horizontal}
                 >
                 <Alert onClose={handleClose} severity="success">
