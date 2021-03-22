@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
       },
     addTrain: {
-        fontSize: '2rem',
+        fontSize: '1.5rem',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -32,7 +32,9 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: 'auto',
         marginRight: 'auto',
         cursor: 'pointer',
-        backgroundColor: '#b8b8b8'
+        color: 'black',
+        border: '1px solid #cc5577',
+        borderRadius: '5px'
     },
     icon: {
         fontSize: '4rem'

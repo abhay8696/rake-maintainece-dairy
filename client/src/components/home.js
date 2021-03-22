@@ -54,13 +54,13 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     borderRadius:'5px',
     // backgroundColor: '#f3f169',
-    margin: '4px 0px',
+    // margin: '4px 0px',
     [theme.breakpoints.between('sm','md')]: {
       maxWidth: '50%'
     },
     padding: '8px',
     [theme.breakpoints.down('sm')]: {
-        width: '100%'
+        width: '49%'
     },
     maxWidth: '500px'
   },
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paperValue: {
     fontSize: '2rem',
-    margin: '4px 0',
+    // margin: '4px 0',
     '& > *': {
         display: 'flex',
         flexDirection: 'column',
@@ -336,12 +336,12 @@ const Home = (props) => {
                 <span className={classes.paperValue}>{profileData.name}</span>
               </div>
               <div className={classes.paperObject}>
-                <span className={classes.paperProperty}>Designation</span> 
-                <span className={classes.paperValue}>{profileData.designation}</span>
-              </div>
-              <div className={classes.paperObject}>
                 <span className={classes.paperProperty}>Employee ID</span> 
                 <span className={classes.paperValue}>{profileData.employeeId}</span>
+              </div>
+              <div className={classes.paperObject}>
+                <span className={classes.paperProperty}>Designation</span> 
+                <span className={classes.paperValue}>{profileData.designation}</span>
               </div>
               <div className={classes.paperObject}>
                 <span className={classes.paperProperty}>Batch</span> 
