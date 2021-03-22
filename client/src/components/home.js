@@ -58,9 +58,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.between('sm','md')]: {
       maxWidth: '50%'
     },
-    padding: '8px',
+    padding: '8px 0px',
     [theme.breakpoints.down('sm')]: {
-        width: '49%'
+        width: '45%'
     },
     maxWidth: '500px'
   },
