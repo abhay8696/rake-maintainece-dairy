@@ -110,20 +110,25 @@ const useStyles = makeStyles((theme) => ({
     left: 'auto',
     right: 'auto',
     flexWrap: 'wrap',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    [theme.breakpoints.down('xs')]:{
+      justifyContent: 'space-between',
+    },
   },
   card: {
-    minWidth: 275,
     maxWidth: '500px',
     margin: '4px',
     // backgroundColor:'#f3f169',
-    [theme.breakpoints.up('lg')]: {
-      // margin: '8px 22px',
+    [theme.breakpoints.up('sm')]: {
+      minWidth: 275,
     },
     [theme.breakpoints.down('xs')]: {
-      width: '100%',
+      width: '49%',
       margin:'4px 0px',
     },
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     boxShadow: '2px 2px 6px 0px rgba(50, 50, 50, 0.83)',
   },
   addIcon:{
@@ -158,17 +163,24 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'baseline',
     justifyContent: 'space-between',
-    padding: '0px 4px'
+    padding: '0px 4px',
+    [theme.breakpoints.down('xs')]:{
+      flexDirection: 'column'
+    },
   },
   dateDay:{
     fontSize: 14,
     display: 'flex',
     alignItems: 'baseline',
     justifyContent: 'space-between',
+    // flexWrap: 'wrap',
     padding: '4px 4px',
     // backgroundColor: '#eac100',
     '& > *':{
       color: '',
+    },
+    [theme.breakpoints.down('xs')]:{
+      fontSize: 13,
     },
   },
   cardActions:{
@@ -274,7 +286,7 @@ const Home = (props) => {
         divArray.push(<Card className={classes.card}>
           <CardContent className={classes.cardRoot} style={{color: cardColors[num]}}>
             <Typography className={classes.dateDay} style={{color: cardColors[num]}} gutterBottom>
-              <Typography variant="h5" component="h2">
+              <Typography variant="" component="h2">
                 {log.header[0].date}
               </Typography>
               <span>{log.header[0].day}</span>
@@ -284,7 +296,11 @@ const Home = (props) => {
             </Typography>
               {
                 log.trains[0] ?  
-                  displayTrainOnCard(log)
+                  <Typography variant="body2" component="p" className={classes.title}>
+                    <span style={{textAlign: 'left'}}>{"Train No: " + log.trains[0].trainNo}</span>
+                    <span>{log.trains[0].trainName}</span> 
+                  </Typography>
+                // displayTrainOnCard(log)
                 : 
                   <Typography variant="body2" component="p" className={classes.title}>
                         <span>No Trains</span> 

@@ -564,7 +564,9 @@ const classes = useStyles(),
                 </div>
                 
             </div>
-                <Button type='submit' onClick={handleClick()} className={classes.submit}>Save</Button>
+                <a href="#linear">
+                    <Button type='submit' onClick={handleClick()} className={classes.submit}>Save</Button>
+                </a>
             </form>
               <Snackbar 
                 anchorOrigin={{ vertical, horizontal }}
@@ -581,9 +583,10 @@ const classes = useStyles(),
         </Paper>
         <div className={classes.AllTrains} style={{}}>
             { IsAllTrainDataFound ? displayTrains() : <></> }
-            <div className={classes.fetchingIcon} style={{display: toggleFetchIcon}}>
+            <div className={classes.fetchingIcon} style={{display: toggleFetchIcon}} id="linear">
                 {/* <span>Fetching Train</span> */}
-                <LinearProgress />
+                <a name="linear"><LinearProgress /></a>
+                
             </div>
         </div>
         </div>
