@@ -118,7 +118,7 @@ const useStyles = makeStyles((theme) => ({
   card: {
     maxWidth: '500px',
     margin: '4px',
-    // backgroundColor:'#f3f169',
+    // backgroundColor:'#cc5577',
     [theme.breakpoints.up('sm')]: {
       minWidth: 275,
     },
@@ -188,6 +188,12 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center'
   },
   openLogButton:{
+    // background: '#cc5577',
+    color: '#cc5577',
+    border: '1px solid #cc5577',
+    borderRadius: '5px'
+  },
+  createNewLogButton:{
     border: '1px soild grey',
     // backgroundColor: 'grey',
     borderRadius: '5px'
@@ -348,7 +354,7 @@ const Home = (props) => {
               {/* <span className={singleLog}></span> */}
             </Paper>
                 <Link to='/LogForm' style={{textDecoration:'none'}}>
-                    <Button size="small" variant="outlined" className={classes.openLogButton}>
+                    <Button size="small" variant="outlined" className={classes.createNewLogButton}>
                       Create New Log
                       <PostAddIcon fontSize="large"/>
                     </Button>

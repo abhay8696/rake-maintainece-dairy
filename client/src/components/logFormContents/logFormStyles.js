@@ -82,7 +82,9 @@ const useStyles = makeStyles((theme) => ({
       },
     },
     submit: {
-      background: 'skyblue',
+      // background: '#cc5577',
+      color: '#cc5577',
+      border: '1px solid #cc5577',
       maxWidth: '100px',
       display: 'flex',
       justifyContent: 'center',

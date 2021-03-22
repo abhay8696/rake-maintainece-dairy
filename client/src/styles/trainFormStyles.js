@@ -167,7 +167,9 @@ const useStyles = makeStyles((theme) => ({
     maxWidth:'133px'
   },
   submit: {
-    background: '#fbe8a6',
+    // background: '#cc5577',
+    color: '#cc5577',
+    border: '1px solid #cc5577',
     maxWidth: '100px',
     display: 'flex',
     justifyContent: 'center',
