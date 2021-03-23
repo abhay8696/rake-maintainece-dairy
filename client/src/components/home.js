@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import UserContext from '../context/UserContext' 
 import ProfileContext from '../context/ProfileContext' 
 import CurrentLogContext from '../context/CurrentLogContext'
@@ -11,8 +11,10 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import GridOffIcon from '@material-ui/icons/GridOff';
+import SearchIcon from '@material-ui/icons/Search';
 
 import axios from 'axios'
 import { Link, useHistory } from 'react-router-dom'
@@ -187,6 +189,11 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex', 
     justifyContent: 'center'
   },
+  buttons:{
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-around',
+  },
   openLogButton:{
     // background: '#cc5577',
     color: '#cc5577',
@@ -216,6 +223,16 @@ const useStyles = makeStyles((theme) => ({
       width: '100%',
     },
   },
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    maxWidth: '45%'
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200,
+  },
 }));
 
 
@@ -226,6 +243,7 @@ const Home = (props) => {
     const { CurrentLog, setCurrentLog} = useContext(CurrentLogContext)
     const classes = useStyles();
     const { root, profilePaper } = classes
+    const [showAllLogs, setShowAllLogs] = useState(true)
     // const [Logs, setLogs] = useState([])
     // const bull = <span className={classes.bullet}>•</span>;
     // // 
@@ -283,7 +301,26 @@ const Home = (props) => {
       })
       return array
     }
+    
+    const searchLog = (evt)=> {
+      console.log('search button clicked')
+      let newDate = evt.target.value
+      newDate = newDate.split("-").reverse().join('-')
+      console.log(newDate)
 
+      setShowAllLogs(true)
+      for(let i=0; i<profileData.logs.length; i++){
+        if(profileData.logs[i].header[0].date === newDate){
+          console.log(profileData.logs[i])
+        }
+      }
+    }
+
+    const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18'));
+
+    const handleDateChange = (date) => {
+      setSelectedDate(date);
+    };
     const displayLog = ()=> {
       let divArray = []
       let num = 0
@@ -353,17 +390,37 @@ const Home = (props) => {
               </span> */}
               {/* <span className={singleLog}></span> */}
             </Paper>
+            <div className={classes.buttons}>
                 <Link to='/LogForm' style={{textDecoration:'none'}}>
                     <Button size="small" variant="outlined" className={classes.createNewLogButton}>
                       Create New Log
                       <PostAddIcon fontSize="large"/>
                     </Button>
                 </Link>
-            
+                {/* <Button size="small" variant="outlined" className={classes.createNewLogButton} onClick={()=>searchLog()}>
+                      Search By Date
+                      <SearchIcon fontSize="large"/>
+                </Button> */}
+                
+            <form className={classes.container} noValidate>
+              <TextField
+                id="date"
+                label="Search By Date"
+                type="date"
+                defaultValue="2021-03-23"
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={(evt)=> searchLog(evt)}
+              />
+            </form>
+            </div>
+
             <div className={classes.allLogs}> 
               {
                 profileData.logs.length > 0 ?
-                  displayLog()
+                  showAllLogs ? displayLog() : <></>
                 :
                   <div className={classes.noLogMsg}>
                     <GridOffIcon />  
