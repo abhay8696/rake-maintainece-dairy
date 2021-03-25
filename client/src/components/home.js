@@ -15,6 +15,7 @@ import TextField from '@material-ui/core/TextField';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import GridOffIcon from '@material-ui/icons/GridOff';
 import SearchIcon from '@material-ui/icons/Search';
+import AppsIcon from '@material-ui/icons/Apps';
 
 import axios from 'axios'
 import { Link, useHistory } from 'react-router-dom'
@@ -244,6 +245,9 @@ const Home = (props) => {
     const classes = useStyles();
     const { root, profilePaper } = classes
     const [showAllLogs, setShowAllLogs] = useState(true)
+    const [showSearchedLog, setShowSearchedLog] = useState(false)
+    const [logBucket, setLogBucket] = useState(profileData.logs)
+    const [noLogsAlert, setNoLogsAlert] = useState(false)
     // const [Logs, setLogs] = useState([])
     // const bull = <span className={classes.bullet}>•</span>;
     // // 
@@ -275,6 +279,7 @@ const Home = (props) => {
           logs: [...data.logs] ,
           employeeId: data.employeeId
         })
+        setLogBucket([...data.logs])
       // }
 
       console.log(data.logs)
@@ -302,17 +307,27 @@ const Home = (props) => {
       return array
     }
     
-    const searchLog = (evt)=> {
+    const searchLog = async (evt)=> {
+      let notFound = false
       console.log('search button clicked')
       let newDate = evt.target.value
       newDate = newDate.split("-").reverse().join('-')
       console.log(newDate)
 
-      setShowAllLogs(true)
       for(let i=0; i<profileData.logs.length; i++){
         if(profileData.logs[i].header[0].date === newDate){
-          console.log(profileData.logs[i])
+          // setNoLogsAlert(false)
+          setLogBucket([profileData.logs[i]])
+          setShowSearchedLog(true)
+          console.log('newdate match!!')
+          notFound =true
         }
+      }
+      if(notFound){
+        // setNoLogsAlert(false)
+        // setTimeout(() => {
+        //   setNoLogsAlert(false)
+        // }, 1000);
       }
     }
 
@@ -324,7 +339,7 @@ const Home = (props) => {
     const displayLog = ()=> {
       let divArray = []
       let num = 0
-      profileData.logs.map(log=>{
+      logBucket.map(log=>{
         // num === cardColors.length-1 ? num=0 : num++  //to generate font-color 
         divArray.push(<Card className={classes.card}>
           <CardContent className={classes.cardRoot} style={{color: cardColors[num]}}>
@@ -419,13 +434,38 @@ const Home = (props) => {
 
             <div className={classes.allLogs}> 
               {
+                noLogsAlert ? 
+                <div className={classes.noLogMsg}>
+                    <GridOffIcon />  
+                    <span>No Logs Added On This Date! </span>
+                </div>
+                : <></>
+              }
+              {
                 profileData.logs.length > 0 ?
-                  showAllLogs ? displayLog() : <></>
+                  displayLog()
                 :
                   <div className={classes.noLogMsg}>
                     <GridOffIcon />  
                     <span>No Logs Added! </span>
                   </div>
+              }
+              {
+                showSearchedLog ?  
+                <Button 
+                  size="small" 
+                  variant="outlined" 
+                  className={classes.createNewLogButton}
+                  onClick={()=> {
+                    setNoLogsAlert(false)
+                    setShowSearchedLog(false)
+                    setLogBucket(profileData.logs)
+                  }}
+                >
+                  Show All Logs
+                  <AppsIcon />
+              </Button>
+                : <></>
               }
             </div>
           </div>
