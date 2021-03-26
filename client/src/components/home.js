@@ -204,7 +204,15 @@ const useStyles = makeStyles((theme) => ({
   createNewLogButton:{
     border: '1px soild grey',
     // backgroundColor: 'grey',
-    borderRadius: '5px'
+    borderRadius: '5px',
+  },
+  showAllLogsButton:{
+    border: '1px soild grey',
+    borderRadius: '5px',
+    [theme.breakpoints.down('xs')]: {
+      width: '49%',
+      margin:'4px 0px',
+    },
   },
   pos: {
     marginBottom: 12,
@@ -308,26 +316,31 @@ const Home = (props) => {
     }
     
     const searchLog = async (evt)=> {
-      let notFound = false
-      console.log('search button clicked')
-      let newDate = evt.target.value
-      newDate = newDate.split("-").reverse().join('-')
-      console.log(newDate)
+      let foundLogs = 0
+      console.log(profileData.logs)
+      let searchDate = evt.target.value
+      searchDate = searchDate.split("-").reverse().join('-')
+      console.log(searchDate)
+      let arr = []
 
       for(let i=0; i<profileData.logs.length; i++){
-        if(profileData.logs[i].header[0].date === newDate){
-          // setNoLogsAlert(false)
-          setLogBucket([profileData.logs[i]])
-          setShowSearchedLog(true)
-          console.log('newdate match!!')
-          notFound =true
+        if(profileData.logs[i].header[0].date === searchDate){
+          arr.push(profileData.logs[i])
+          foundLogs++
         }
       }
-      if(notFound){
-        // setNoLogsAlert(false)
-        // setTimeout(() => {
-        //   setNoLogsAlert(false)
-        // }, 1000);
+      if(foundLogs === 0){
+        console.log('log not found')
+        setNoLogsAlert(true)
+        setTimeout(() => {
+          setNoLogsAlert(false)
+        }, 5000);
+        setLogBucket(profileData.logs)
+      }else{
+        console.log(foundLogs)
+        console.log(arr)
+        setLogBucket(arr)
+        setShowSearchedLog(true)
       }
     }
 
@@ -455,7 +468,7 @@ const Home = (props) => {
                 <Button 
                   size="small" 
                   variant="outlined" 
-                  className={classes.createNewLogButton}
+                  className={classes.showAllLogsButton}
                   onClick={()=> {
                     setNoLogsAlert(false)
                     setShowSearchedLog(false)
