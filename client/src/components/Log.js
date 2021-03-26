@@ -70,6 +70,14 @@ const Log = (props) => {
                     />
 
                     {
+                    logData.trains[0] ? 
+                        <div>
+                            {displayTrains()}
+                        </div>
+                        : <h3>Train data not available</h3>
+                    }
+                    
+                    {
                         logData.staff[0] ?
                         <Staff
                         testing     = {brakePower}
@@ -82,14 +90,6 @@ const Log = (props) => {
                         />
                         :
                         <h3>Staff data not available</h3>
-                    }
-                    <br/>
-                    {
-                    logData.trains[0] ? 
-                        <div>
-                            {displayTrains()}
-                        </div>
-                        : <h3>Train data not available</h3>
                     }
                 </div >
         // return <h1>asdad</h1>

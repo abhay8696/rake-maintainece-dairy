@@ -1,6 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -190,25 +194,35 @@ const Staff = (props) => {
 
     const classes = useStyles();
     return (
-        <div className={classes.root}>
-          <Paper elevation={3} className={classes.paperRoots}>
-          <span className={classes.paperTitle}>Staff</span>
-          <div  className={classes.paperObjectDiv}>
-            {
-              displayPaperObjects()
-            }
-          </div>
-          </Paper>
-          <Paper elevation={3} className={classes.paperRoots}>
-          <span className={classes.paperTitle}>Total Sanctioned Strength</span>
-          <div className={classes.strengthPaperBody}>
-            {
-              displayStrength()
-            }
-          </div>
-          </Paper>
+      <div className={classes.root}>
+        <Paper elevation={3} className={classes.paperRoots}>
+        <span className={classes.paperTitle}>Staff</span>
+        <div  className={classes.paperObjectDiv}>
+          {
+            displayPaperObjects()
+          }
         </div>
-    )
+        </Paper>
+        <Paper elevation={3} className={classes.paperRoots}>
+        <span className={classes.paperTitle}>Total Sanctioned Strength</span>
+        <div className={classes.strengthPaperBody}>
+          {
+            displayStrength()
+          }
+        </div>
+        </Paper>
+      </div>
+  )
 }
 
 export default Staff
+
+
+
+
+
+
+
+/*
+
+*/
