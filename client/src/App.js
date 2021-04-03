@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
@@ -22,15 +22,12 @@ import './App.css';
 const useStyles = makeStyles((theme) => ({
     mainArea: {
       overflow: 'auto',
-      [theme.breakpoints.up('md')] : {
-      },
       width: '100%'
     }
 }))
 
 function App() {
   const classes = useStyles();
-  // const [IsAuthenticated, setIsAuthenticated] = useState(false)
   const [userData, setUserData] = useState({
     token: undefined,
     user: undefined,
@@ -80,13 +77,13 @@ function App() {
                     <Navbar />
                     <div className="body">
                       <div className={classes.mainArea}>
-                      <Route exact path='/login' component={ Login }/>
                       <Route exact path='/register' component={ Register } />
                         {
                           userData.user ?
                           <Fragment>
                           <Route exact path='/' component={ Home } /> 
                           <Route exact path='/home' component={ Home } /> 
+                          <Route exact path='/login' component={ Home }/>
                             <Route exact path='/LogForm' component={ LogForm } /> 
                             <Route exact path='/LogForm/train' component={ Trains } /> 
                             <Route exact path='/LogForm/train/coaches' component={ Coach } /> 
@@ -95,8 +92,14 @@ function App() {
                           </Fragment>
                           :
                           <Fragment>
+                          <Route exact path='/login' component={ Login }/>
                           <Route exact path='/' component={ Login }/>
-                          <Route exact path='/home' component={ Home } /> 
+                          <Redirect exact path='/home' component={ Home } /> 
+                            <Redirect exact path='/LogForm' component={ Login } /> 
+                            <Redirect exact path='/LogForm/train' component={ Login } /> 
+                            <Redirect exact path='/LogForm/train/coaches' component={ Login } /> 
+                            <Redirect exact path='/Log' component={ Login } /> 
+                            <Redirect exact path='/log/header' component={ Login } /> 
                           </Fragment>
                         }
                       </div>

@@ -38,7 +38,9 @@ const Header = (props) => {
             day: dayy[date.getDay()]
           },
           Place = ['GCMC', 'OWS', 'NWS']
-    let currentDate = `${defDate.yyyy}-0${defDate.mm}-${defDate.dd}`
+    if(defDate.dd < 10) defDate.dd = `0${defDate.dd}`
+    if(defDate.mm < 10) defDate.mm = `0${defDate.mm}`
+    let currentDate = `${defDate.yyyy}-${defDate.mm}-${defDate.dd}`
     // const [ddmmyy, setDDMMYY] = useState(Place[0])
     const [place, setPlace] = useState(Place[0])
     const [day, setDay] = useState(defDate.day)
@@ -60,9 +62,6 @@ const Header = (props) => {
       }
       setsnackbarState({ ...snackbarState, snackBarOpen: false });
     };
-    if(defDate.mm < 10) {
-      currentDate = `${defDate.yyyy}-0${defDate.mm}-${defDate.dd}`
-    }else currentDate = `${defDate.yyyy}-${defDate.mm}-${defDate.dd}`
 
     const body = {
       date : currentDate,
@@ -81,7 +80,6 @@ const Header = (props) => {
     const hanldeSubmit = async (evt)=> {
       evt.preventDefault()
       enableStaffAndTrain();
-      // console.log(evt)
       sendData()
       scroll()
     }

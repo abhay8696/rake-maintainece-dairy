@@ -4,33 +4,22 @@ import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      // backgroundColor: '#303c6c',
-      // fontSize: '25px',
-      // height: '250px',
       width: '100%',
       display: 'flex',
       flexWrap: 'wrap',
       justifyContent: 'space-between',
-      '& > *': {
-      },
     },
     paper: {
-      // backgroundColor: '#303c6c',
-      // fontSize: '25px',
-      // height: '250px',
       width: '100%',
       display: 'flex',
       flexWrap: 'wrap',
       justifyContent: 'space-around',
-      '& > *': {
-      },
     },
     paperObject:{
       width: '40%',
       display: 'flex',
       flexDirection: 'column',
       borderRadius:'5px',
-      backgroundColor: 'white',
       margin: '4px 0px',
       padding: '8px',
       [theme.breakpoints.down('sm')]: {
@@ -38,9 +27,6 @@ const useStyles = makeStyles((theme) => ({
           maxWidth: '49%',
       },
       maxWidth: '500px'
-    },
-    paperProperty:{
-      // fontWeight: 'bold'
     },
     paperValue: {
       fontSize: '2rem',

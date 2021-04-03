@@ -28,29 +28,15 @@ const useStyles = makeStyles((theme) => ({
     deleteButton:{
         display: 'flex',
         alignItems: 'center',
-        // marginLeft: '16px',
         [theme.breakpoints.up('md')]:{
             marginLeft: '128px',
-        },
-        [theme.breakpoints.down('sm')]:{
-            // marginLeft: '16px',
         },
     },
     accordionDetails: {
         fontSize: '15px',
         display: 'flex',
-        // width: '100%',
         flexWrap: 'wrap',
-        // flexDirection:'column',
         justifyContent: 'space-around',
-        // padding: '0px',
-        '& > *': {
-        //   margin: theme.spacing(1),
-        //   // width: theme.spacing(16),
-        //   display: 'flex',
-        //   height: 'auto',
-        //   alignItems: 'baseline',
-        },
         
     },
     accordDivs:{
@@ -59,7 +45,6 @@ const useStyles = makeStyles((theme) => ({
         borderRight: '1px solid #a19f9f',
         borderBottom: '1px solid #a19f9f',
         borderRadius:'5px',
-        // backgroundColor: '#e6e6e6',
         margin: '4px 0px',
         padding: '4px',
         [theme.breakpoints.down('sm')]: {
@@ -74,14 +59,12 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold'
     },
     accordDivDetails:{
-        // backgroundColor: 'blue',
         display: 'flex',
         flexWrap: 'wrap',
         flexShrink: '1',
         margin: '4px 0',
         '& > *': {
             display: 'flex',
-            // flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'space-between',
             margin: '4px',
@@ -89,7 +72,6 @@ const useStyles = makeStyles((theme) => ({
         },
         [theme.breakpoints.down('sm')]:{
             '& > *': {
-                // flexDirection: 'column',
                 width: '45%'
             },
             justifyContent: 'space-between',
@@ -102,8 +84,6 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     property: {
-        // backgroundColor: 'red',
-        // fontWeight: 'bold',
         [theme.breakpoints.down('sm')]: {
             marginRight: '4px'
         }
@@ -111,9 +91,7 @@ const useStyles = makeStyles((theme) => ({
     pressureDivs:{
         display: 'flex',
         flexDirection: 'column',
-        // height: '100px',
         [theme.breakpoints.down('sm')]:{
-            // backgroundColor: 'teal',
             alignItems: 'flex-start',
             '& > *':{
                 margin: 'auto 0px'
@@ -121,13 +99,10 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     frontRear:{
-        // backgroundColor: 'red',
         marginRight: '8px',
-        // marginLeft: theme.spacing(1), 
     },
     value: {
         borderRadius: '5px',
-        // backgroundColor: '#b5b5b5',
         padding: theme.spacing(0),
         [theme.breakpoints.up('md')]: {
             fontSize: '25px',
@@ -141,11 +116,7 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         '& > *': {
             display: 'flex',
-            // flexWrap: 'wrap',
             alignItems: 'baseline',
-            [theme.breakpoints.down('sm')]:{
-                // maxWidth: '100px',
-            },
         },
         [theme.breakpoints.up('md')]:{
             width: '90%',
@@ -197,8 +168,6 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const Train = (props) => {
-    // const {testing, carpentry, oiling, otherWorks, 
-    //     pipeFitting, strength, underGear} = props;
     const { data, currentLog } = props;
     console.log(data.sickCoaches)
     const classes = useStyles();
@@ -211,15 +180,11 @@ const Train = (props) => {
             load } = data
     const { memoNo, timeRecieved, pitlineNo } = data.formation
     const { lineBlockingTime, lineReleaseTime } = data.protectionOfRake
-    // const trainId = collection[0]._id;
     
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
       };
     
-    const toggleCoach = ()=> {
-        setCoachTableOn(!CoachTableOn);
-    }
 
     const evalVariable = (stateName, val)=> {
         let object = stateName,
@@ -227,7 +192,6 @@ const Train = (props) => {
             method = `${val}`,
             wholeString = object + dot + method;
         return(eval(wholeString)) 
-        // console.log(eval(wholeString))
     } 
 
     const displayWashing = ()=> {
@@ -254,7 +218,6 @@ const Train = (props) => {
     }
 
     return (
-        // <div className={classes.root}>
             <Accordion className={classes.root} expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
                 <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -282,7 +245,6 @@ const Train = (props) => {
                     </div>
                 </AccordionSummary>
                 <AccordionDetails className={classes.accordionDetails}>
-                    {/* <div className={classes.paper}> */}
                         <div className={classes.accordDivs}>
                             <span className={classes.accordDivTitles}>Formation</span>
                             <div className={classes.accordDivDetails}>
@@ -302,10 +264,8 @@ const Train = (props) => {
                                 <div>
                                     <span className={classes.property}>Load</span>
                                     <span className={classes.value}>{load}</span></div>
-                                {/* className={classes.property} <div>Pit No<span className={classes.value}>{pitlineNo}</span></div> */}
                             </div>
                         </div>
-                        {/* className={classes.property} <div>Load<span className={classes.value}>{load}</span></div> */}
                         <div className={classes.accordDivs}> 
                             <span className={classes.accordDivTitles}>Protection Of Rake</span>
                             <div className={classes.accordDivDetails}>
@@ -409,7 +369,6 @@ const Train = (props) => {
                     </div>
                 </AccordionDetails>
             </Accordion>
-        // </div>
     )
 }
 
