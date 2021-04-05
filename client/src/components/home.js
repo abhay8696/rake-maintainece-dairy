@@ -17,6 +17,7 @@ import AppsIcon from '@material-ui/icons/Apps';
 
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import { motion } from "framer-motion"
 
 import useStyles from './styles/home'
 
@@ -136,12 +137,27 @@ const Home = (props) => {
       })
       return divArray.reverse();
     }
-
+    
+    const paperTransition = {     //to make page transition using framer-motion library
+      in: {
+        opacity: 1,
+        x:0,
+      },
+      out:{
+        opacity: 0,
+        x: "-100vw"
+      }
+    }
     return (
           !userData.user ?     //check if not logged in
             <h1>You need to be logged in to Access this page!</h1>
           :
-          <div className={root}>
+          <motion.div className={root} 
+          initial="out" 
+          animate="in" 
+          exit="out" 
+          variants={paperTransition}
+          >
             <Paper elevation={1} className={profilePaper}>
               <div className={classes.paperObject}>
                 <span className={classes.paperProperty}>Train Examiner</span>  
@@ -220,7 +236,7 @@ const Home = (props) => {
                 : <></>
               }
             </div>
-          </div>
+          </motion.div>
     )
 }
 

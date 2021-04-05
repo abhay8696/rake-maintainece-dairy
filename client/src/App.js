@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react'
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect, Switch, useLocation } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
@@ -17,6 +17,7 @@ import ProfileContext from './context/ProfileContext'
 import CurrentLogContext from './context/CurrentLogContext'  //to track current log
 import CurrentTrainContext from './context/CurrentTrainContext'  //to track current Train
 import './App.css';
+import { AnimatePresence } from "framer-motion"
 // import 'bootstrap/dist/css/bootstrap.min.css'
 
 const useStyles = makeStyles((theme) => ({
@@ -27,6 +28,8 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 function App() {
+  const location = useLocation
+  console.log(location)
   const classes = useStyles();
   const [userData, setUserData] = useState({
     token: undefined,
@@ -77,31 +80,35 @@ function App() {
                     <Navbar />
                     <div className="body">
                       <div className={classes.mainArea}>
-                      <Route exact path='/register' component={ Register } />
-                        {
-                          userData.user ?
-                          <Fragment>
-                          <Route exact path='/' component={ Home } /> 
-                          <Route exact path='/home' component={ Home } /> 
-                          <Route exact path='/login' component={ Home }/>
-                            <Route exact path='/LogForm' component={ LogForm } /> 
-                            <Route exact path='/LogForm/train' component={ Trains } /> 
-                            <Route exact path='/LogForm/train/coaches' component={ Coach } /> 
-                            <Route exact path='/Log' component={ Log } /> 
-                            <Route exact path='/log/header' component={ Header } /> 
-                          </Fragment>
-                          :
-                          <Fragment>
-                          <Route exact path='/login' component={ Login }/>
-                          <Route exact path='/' component={ Login }/>
-                          <Redirect exact path='/home' component={ Home } /> 
-                            <Redirect exact path='/LogForm' component={ Login } /> 
-                            <Redirect exact path='/LogForm/train' component={ Login } /> 
-                            <Redirect exact path='/LogForm/train/coaches' component={ Login } /> 
-                            <Redirect exact path='/Log' component={ Login } /> 
-                            <Redirect exact path='/log/header' component={ Login } /> 
-                          </Fragment>
-                        }
+                        <AnimatePresence exitBeforeEnter>
+                          <Switch location={location} key={location.pathname}>
+                          <Route exact path='/register' component={ Register } />
+                            {
+                              userData.user ?
+                              <Fragment>
+                              <Route exact path='/' component={ Home } /> 
+                              <Route exact path='/home' component={ Home } /> 
+                              <Route exact path='/login' component={ Home }/>
+                                <Route exact path='/LogForm' component={ LogForm } /> 
+                                <Route exact path='/LogForm/train' component={ Trains } /> 
+                                <Route exact path='/LogForm/train/coaches' component={ Coach } /> 
+                                <Route exact path='/Log' component={ Log } /> 
+                                <Route exact path='/log/header' component={ Header } /> 
+                              </Fragment>
+                              :
+                              <Fragment>
+                              <Route exact path='/login' component={ Login }/>
+                              <Route exact path='/' component={ Login }/>
+                              <Redirect exact path='/home' component={ Home } /> 
+                                <Redirect exact path='/LogForm' component={ Login } /> 
+                                <Redirect exact path='/LogForm/train' component={ Login } /> 
+                                <Redirect exact path='/LogForm/train/coaches' component={ Login } /> 
+                                <Redirect exact path='/Log' component={ Login } /> 
+                                <Redirect exact path='/log/header' component={ Login } /> 
+                              </Fragment>
+                            }
+                            </Switch>
+                        </AnimatePresence>
                       </div>
                     </div>
                 </Fragment>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { motion } from "framer-motion"
 
 import Header from './logContents/Header'
 import Staff from './logContents/Staff' 
@@ -32,6 +33,16 @@ const Log = (props) => {
         setisLogAvailable(true)
     },[])
 
+    const paperTransition = {     //to make page transition using framer-motion library
+        in: {
+          opacity: 1,
+          x:0,
+        },
+        out:{
+          opacity: 0,
+          x: "100vw"
+        }
+      }
     const display = ()=> {
         console.log(logData.trains[1])
         const {date, day, depot } = logData.header[0]
@@ -49,7 +60,12 @@ const Log = (props) => {
             })
             return trainArray;
         }
-        return  <div className={classes.root}>
+        return  <motion.div className={classes.root}
+                initial="out" 
+                animate="in" 
+                exit="out" 
+                variants={paperTransition}
+                >
                     <Header 
                         date    = {date}
                         day     = {day}
@@ -80,8 +96,9 @@ const Log = (props) => {
                         :
                         <h3>Staff data not available</h3>
                     }
-                </div >
+                </motion.div >
     }
+    
 
     return ( 
         isLogAvailable ? display() : <h2>Loading...</h2>
