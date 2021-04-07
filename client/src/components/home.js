@@ -32,6 +32,7 @@ const Home = (props) => {
     const [showSearchedLog, setShowSearchedLog] = useState(false)
     const [logBucket, setLogBucket] = useState(profileData.logs)
     const [noLogsAlert, setNoLogsAlert] = useState(false)
+    const [noLogMsg, setNoLogMsg] = useState('')
     
     const loadProfile = async ()=> {
       //check userProfile in local storage
@@ -90,11 +91,14 @@ const Home = (props) => {
       if(foundLogs === 0){
         console.log('log not found')
         setNoLogsAlert(true)
+        setNoLogMsg('No Logs found on this date!')
         setTimeout(() => {
           setNoLogsAlert(false)
         }, 5000);
         setLogBucket(profileData.logs)
       }else{
+        setNoLogsAlert(false)
+        setNoLogMsg('')
         setLogBucket(arr)
         setShowSearchedLog(true)
       }
@@ -138,15 +142,20 @@ const Home = (props) => {
       return divArray.reverse();
     }
     
-    const paperTransition = {     //to make page transition using framer-motion library
+    const 
+    paperTransition = {     //to make page transition using framer-motion library
       in: {
         opacity: 1,
-        x:0,
+        y:0,
       },
       out:{
         opacity: 0,
-        x: "-100vw"
+        y: "100vh"
       }
+    },
+    pageTransition = {
+      duration: 0.3,
+      transition: 'linear'
     }
     return (
           !userData.user ?     //check if not logged in
@@ -157,6 +166,7 @@ const Home = (props) => {
           animate="in" 
           exit="out" 
           variants={paperTransition}
+          transition={pageTransition}
           >
             <Paper elevation={1} className={profilePaper}>
               <div className={classes.paperObject}>
@@ -187,6 +197,8 @@ const Home = (props) => {
                 
             <form className={classes.container} noValidate>  {/*search button*/}
               <TextField
+                error= {noLogsAlert}
+                helperText={noLogMsg}
                 id="date"
                 label="Search By Date"
                 type="date"
@@ -202,18 +214,10 @@ const Home = (props) => {
 
             <div className={classes.allLogs}> 
               {
-                noLogsAlert ?                     //if searched log is not present
-                <div className={classes.noLogMsg}>
-                    <GridOffIcon />  
-                    <span>No Logs Added On This Date! </span>
-                </div>
-                : <></>
-              }
-              {
                 profileData.logs.length > 0 ?     //display all logs
                   displayLog()
                 :
-                  <div className={classes.noLogMsg}>
+                  <div className={classes.noLogMsg, setNoLogMsg}>
                     <GridOffIcon />  
                     <span>No Logs Added! </span>
                   </div>

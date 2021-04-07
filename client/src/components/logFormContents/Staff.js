@@ -2,6 +2,10 @@ import React, { useState, useContext } from 'react'
 import UserContext from '../../context/UserContext'  
 import CurrentLogContext from '../../context/CurrentLogContext'
 import axios from 'axios'
+import { motion } from "framer-motion"
+import { paperTransition, pageTransition } from '../pageTransition'
+import { makeStyles } from '@material-ui/core/styles';
+
 
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
@@ -164,6 +168,13 @@ const classes = useStyles(),
     
     
     return (
+      <motion.div
+      initial="out" 
+      animate="in" 
+      exit="out" 
+      variants={paperTransition}
+      transition={pageTransition(0.3, 'linear')}
+      >
         <Paper elevation={3} className={classes.staffRoot}>
             <span className={classes.formTitle}>Staff Position</span>
             <form className={classes.form} onSubmit={(evt)=>hanldeSubmit(evt)}>
@@ -193,6 +204,7 @@ const classes = useStyles(),
                 </Alert>
               </Snackbar>
         </Paper>
+      </motion.div>
     )
 }
 

@@ -6,7 +6,8 @@ import scrollToElement  from 'scroll-to-element'
 
 import Button from '@material-ui/core/Button';
 import TrainIcon from '@material-ui/icons/Train';
-
+import { motion } from "framer-motion"
+import { paperTransition, pageTransition } from './pageTransition'
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -59,8 +60,15 @@ const scroll = ()=> {
         duration: 1500
     })
 }
-    return (
-        <div className={classes.root}>
+
+return (
+        <motion.div className={classes.root}
+        initial="out" 
+        animate="in" 
+        exit="out" 
+        variants={paperTransition}
+        transition={pageTransition(0.3, 'linear')}
+        >
             <Header enableStaffAndTrain={()=>enableStaffAndTrain()} scroll={scroll}/>
             {
                 disableStaffAndTrain ?  <></>    :
@@ -81,7 +89,7 @@ const scroll = ()=> {
                 </Button>
             </div> 
             }
-        </div>
+        </motion.div>
     )
 }
 

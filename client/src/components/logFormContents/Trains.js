@@ -5,6 +5,7 @@ import Train from './Train'
 import CurrentLogContext from '../../context/CurrentLogContext'
 import CurrentTrainContext from '../../context/CurrentTrainContext'
 import axios from 'axios'
+import { motion } from "framer-motion"
 
 
 import TextField from '@material-ui/core/TextField';
@@ -253,10 +254,31 @@ const classes = useStyles(),
         
     }
     
+    const 
+    paperTransition = {     //to make page transition using framer-motion library
+      in: {
+        opacity: 1,
+        y:0,
+      },
+      out:{
+        opacity: 0,
+        y: "-100vh"
+      }
+    },
+    pageTransition = {
+      duration: 0.3,
+      transition: 'linear'
+    }
 
     return (
     // <Container>
-        <div className={classes.root} >
+        <motion.div className={classes.root} 
+        initial="out" 
+        animate="in" 
+        exit="out" 
+        variants={paperTransition}
+        transition={pageTransition}
+        >
         <Paper elevation={3} className={classes.formPaper} onSubmit={(evt)=>SubmitTrain(evt)}>
             <span className={classes.formTitle}>Add New Train</span>
             <form className={classes.form}>
@@ -589,7 +611,7 @@ const classes = useStyles(),
                 
             </div>
         </div>
-        </div>
+        </motion.div>
     // </Container>
     )
 }

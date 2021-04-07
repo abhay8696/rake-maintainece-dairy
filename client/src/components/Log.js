@@ -42,7 +42,11 @@ const Log = (props) => {
           opacity: 0,
           x: "100vw"
         }
-      }
+      },
+    pageTransition = {
+      duration: 0.3,
+      transition: 'linear'
+    }
     const display = ()=> {
         console.log(logData.trains[1])
         const {date, day, depot } = logData.header[0]
@@ -65,6 +69,7 @@ const Log = (props) => {
                 animate="in" 
                 exit="out" 
                 variants={paperTransition}
+                transition={pageTransition}
                 >
                     <Header 
                         date    = {date}
