@@ -64,7 +64,8 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
   introTagline:{
-    fontSize: '1.5rem'
+    fontSize: '1.5rem',
+    marginBottom: '0px'
   },
 }));
 
@@ -112,9 +113,10 @@ const Login = () => {
             Rake Maintenance Diary is a simple Web-App which stores information
             of trians and coaches which are maintained in depot daily.
           </p>
-          <p className={classes.introTagline}> 
-            It's Digital. It's Online. It's Paperless!
-          </p>
+          <div> 
+            <p className={classes.introTagline}>It's Digital. It's Online. It's Paperless!</p>
+            <p  style={{marginTop: '0px'}}>Imagine 100+ large sized journals that can fit in your pocket.</p>
+          </div>
           {iconsArray}
         </div>
         <CssBaseline />
