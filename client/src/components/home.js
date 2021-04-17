@@ -37,18 +37,6 @@ const Home = (props) => {
     const loadProfile = async ()=> {
       //check userProfile in local storage
       let data;
-      // if(localStorage.getItem('userProfile')){  //if true, load profile from local storage
-      //   console.log('getting profile from local storage...')
-      //   data = await JSON.parse(localStorage.getItem('userProfile'))
-      //   setProfileData({
-      //     name : data.name,
-      //     designation: data.designation,
-      //     batch: data.batch,
-      //     logs: [...data.logs] 
-      //   })
-      //   console.log('Abra Kadabra')
-        
-      // }else{    //else fetch from from server
         console.log('fetching profile from server...') 
         let response = await axios.get('api/profile/me', { headers: { "x-auth-token": token}})
 

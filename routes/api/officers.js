@@ -4,8 +4,8 @@ const   express = require('express'),
         bycrypt = require('bcryptjs'),
         jwt     = require('jsonwebtoken'),
         config  = require('config'),
-        User    = require('../../models/User'), //import user model
-        Profile = require('../../models/Profile'), 
+        Officer    = require('../../models/Officer'), //import user model
+        OfficerProfile = require('../../models/OfficerProfile'), 
         cors    = require('../../middleware/cors')
 
 // @route   POST api/users
@@ -31,42 +31,41 @@ router.post('/',
         }
 
         
-        const { name, email, password, batch, designation, employeeId} = req.body;
+        const { name, email, password, designation, employeeId} = req.body;
 
         try{
-            //see if user already exists
-            let user = await User.findOne({ email })
-            if(user){   //user already exists
-                res.status(400).json({ errors: [{ msg: 'User already exist!'}]})
+            //see if officer already exists
+            let officer = await Officer.findOne({ email })
+            if(officer){   //officer already exists
+                res.status(400).json({ errors: [{ msg: 'Officer already exist!'}]})
             }
 
             //create new user
-            user = new User({
-                name,   email,  password, batch, designation, employeeId
+            officer = new Officer({
+                name,   email,  password, designation, employeeId
             })
 
             
 
             //encrypt password
             const salt = await bycrypt.genSalt(10);
-            user.password = await bycrypt.hash(password, salt)
+            officer.password = await bycrypt.hash(password, salt)
 
-            await user.save();
+            await officer.save();
 
             //create new profile
-            let profile = new Profile({
-                user: user.id,
+            let officerProfile = new OfficerProfile({
+                officer: officer.id,
                 name: name,
-                batch: batch,
                 designation: designation,
                 employeeId: employeeId
             })
-            await profile.save();
+            await officerProfile.save();
 
             //return jsonwebtoken
             const payload = {
                 user: {
-                    id: user.id
+                    id: officer.id
                 }
             }
 
@@ -76,7 +75,11 @@ router.post('/',
                 { expiresIn: 360000},
                 (err, token)=> {
                     if(err) throw err;
-                    res.json({ token })
+                    res.json({ 
+                        "New account created...: ":token,
+                        "profile..: ": officerProfile,
+                        "payload :": payload
+                 })
                 }
                 )
 

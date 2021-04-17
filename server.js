@@ -12,8 +12,12 @@ app.use(express.json({ extended: false}))
 
 //Routes
 app.use('/api/users', require('./routes/api/users'))
+app.use('/api/officers', require('./routes/api/officers'))
 app.use('/api/auth', require('./routes/api/auth'))
+app.use('/api/officerAuth', require('./routes/api/officerAuth'))
 app.use('/api/profile', require('./routes/api/profile'))
+app.use('/api/officerProfile', require('./routes/api/officerProfile'))
+app.use('/api/officerProfile/user', require('./routes/api/allUserAllLogs'))
 app.use('/api/log', require('./routes/api/log'))
 app.use('/api/log/header', require('./routes/api/logContents/header'))
 app.use('/api/log/train', require('./routes/api/logContents/train'))
@@ -25,7 +29,7 @@ app.use('/api/log/washingAndCleaning', require('./routes/api/logContents/washing
 // console.log(process.env)
 //Serve static assest in production
 // process.env.NODE_ENV = 'production'
-if(process.env.NODE_ENV === 'production'){
+if(process.env.NODE_ENV === 'production'){ 
     console.log('found production')
     //set the static folder
     app.use(express.static('client/build'))

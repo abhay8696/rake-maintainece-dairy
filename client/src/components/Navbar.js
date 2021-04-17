@@ -187,7 +187,7 @@ const Navbar = () => {
               {/* </span> */}
             </div>
               <span className={classes.appTitle}>
-                Rake Maintenance Diary
+                Rake Maintenance Tracker
               </span>
         </AppBar>
       </div>

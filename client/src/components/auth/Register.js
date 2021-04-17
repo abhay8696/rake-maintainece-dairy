@@ -8,6 +8,11 @@ import LockIcon from '@material-ui/icons/Lock';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 import { Link } from 'react-router-dom'
 import axios from 'axios'
@@ -44,7 +49,7 @@ const Register =()=> {
         [batch, setBatch] = useState(''),
         [designation, setDesignation] = useState(''),
         [employeeId, setEmployeeId] = useState(''),
-
+        [officer, setOfficer] = useState(false),
         handleNameChange = evt=> {
           setName(evt.target.value)
         },
@@ -75,10 +80,14 @@ const Register =()=> {
       designation: designation,
       employeeId: employeeId,
     }
+    let url;
+
     console.log(JSON.stringify(body))
+    body.designation === 'Senior Officer' ? url = "/api/officers" : url = "/api/users"
     await axios
-      .post("/api/users",body)
+      .post(url,body)
       .then(response=> {
+        console.log(url)
         console.log('Registration Successful!')
         console.log(response)
         history.push('/login')
@@ -129,18 +138,23 @@ const Register =()=> {
             value={email}
             onChange={(evt)=>handleEmailChange(evt)}
           />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="designation"
+          <FormControl variant="outlined" className={classes.formControl} fullWidth 
+            margin="normal">
+            <InputLabel>Designation</InputLabel>
+            <Select
+            id="demo-simple-select"
             label="Designation"
-            name="designation"
-            autoComplete="designation"
+            fullWidth
+            variant="outlined" 
+            margin="normal"
             value={designation}
-            onChange={(evt)=>handleDesignationChange(evt)}
-          />
+            onChange={handleDesignationChange}
+            >
+              <MenuItem value={'Senior Officer'}>Senior Officer</MenuItem>
+              <MenuItem value={'Senior Section Engineer'}>Senior Section Engineer</MenuItem>
+              <MenuItem value={'Junior Engineer'}>Junior Engineer</MenuItem>
+            </Select>
+          </FormControl>
           <TextField
             variant="outlined"
             margin="normal"
