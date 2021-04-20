@@ -194,6 +194,16 @@ const useStyles = makeStyles((theme) => ({
       marginRight: theme.spacing(1),
       width: 200,
     },
+    loadingIcon:{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'column',
+      height: '100%',
+      "& :nth-child(1) " : {
+        fontSize: '5rem',
+      }
+    },
   }));
 
   export default useStyles;

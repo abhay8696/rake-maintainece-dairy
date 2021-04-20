@@ -5,11 +5,13 @@ import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import Navbar from './components/Navbar'
 import Home from './components/home' 
+import OfficerHome from './components/officerHome' 
 import LogForm from './components/LogForm' 
 import Trains from './components/logFormContents/Trains' 
 import Coach from './components/logFormContents/Coach'
 import Log from './components/Log' 
 import Header from './components/logFormContents/Header' 
+import SupervisorHome from './components/officerLogs/supervisorHome'
 
 import axios from 'axios'
 import UserContext from './context/UserContext'
@@ -29,12 +31,12 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const location = useLocation
-  console.log(location)
   const classes = useStyles();
   const [userData, setUserData] = useState({
     token: undefined,
     user: undefined,
   })
+  const [userType, setUserType] = useState("supervisor")
 
   const [profileData, setProfileData] = useState({
     name: '',
@@ -48,15 +50,24 @@ function App() {
   
   //to check if user is logged in
   const IsAuthenticated = async ()=> {
+    console.log('running is-authenticated')
     let token = localStorage.getItem('x-auth-token');
     if(token === null){
       localStorage.setItem('x-auth-token', "");
       token = ""
     }
-    const tokenRes = await axios.get(
-      "/api/auth",
+    let tokenRes = await axios.get(
+      "/api/auth",            //supervisor auth route
       { headers: { "x-auth-token": token}}
     )
+    if(!tokenRes.data){       //if tokenRes.data is empty (i.e. not supervisor) check for officer
+      console.log("not supervisor, checking for officer...")
+      tokenRes = await axios.get(
+      "/api/officerAuth",            //officer auth route
+      { headers: { "x-auth-token": token}}
+    )
+    setUserType("officer")
+    }
     setUserData({
       token,
       user: tokenRes.data
@@ -68,6 +79,16 @@ function App() {
     IsAuthenticated();
   }, [])
 
+  const userTypePath = (path)=> {
+    if(path === "supervisor"){
+       console.log("ssssssssssssssssssssss")
+       setUserType("supervisor")
+     } else{ 
+       console.log("oooooooooooooooooooooo")
+       setUserType("officer")
+      }
+     console.log('usertype called')
+  }
   
   return (
     <div className = "root">
@@ -86,8 +107,16 @@ function App() {
                             {
                               userData.user ?
                               <Fragment>
-                              <Route exact path='/' component={ Home } /> 
+                              {
+                                userType === "supervisor" ?
+                                <Route exact path='/' component={ Home }/>
+                                :
+                                <Route exact path='/' component={OfficerHome}/>  
+                              }
                               <Route exact path='/home' component={ Home } /> 
+                              <Route exact path='/officer:officerName/supervisorHome:supID' component={ SupervisorHome } /> 
+                              <Route exact path='/officer:officerName/supervisorHome:supID/log:logDate' component={ Log } /> 
+                              <Route exact path='/officerHome' component={ OfficerHome } /> 
                               <Route exact path='/login' component={ Home }/>
                                 <Route exact path='/LogForm' component={ LogForm } /> 
                                 <Route exact path='/LogForm/train' component={ Trains } /> 
@@ -97,9 +126,11 @@ function App() {
                               </Fragment>
                               :
                               <Fragment>
-                              <Route exact path='/login' component={ Login }/>
-                              <Route exact path='/' component={ Login }/>
+                              <Route exact path='/login' component={()=> <Login userTypePath={userTypePath}/> }/>
+                              <Route exact path='/register' component={ Register }/>
+                              <Route exact path='/' component={()=> <Login userTypePath={userTypePath}/> }/>
                               <Redirect exact path='/home' component={ Home } /> 
+                              <Route exact path='/officerHome' component={ OfficerHome } /> 
                                 <Redirect exact path='/LogForm' component={ Login } /> 
                                 <Redirect exact path='/LogForm/train' component={ Login } /> 
                                 <Redirect exact path='/LogForm/train/coaches' component={ Login } /> 

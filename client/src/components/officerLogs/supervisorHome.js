@@ -1,9 +1,8 @@
-import React, { useEffect, useContext, useState } from 'react'
-import UserContext from '../context/UserContext' 
-import ProfileContext from '../context/ProfileContext' 
-import CurrentLogContext from '../context/CurrentLogContext'
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
 
-
+import useStyles from '../styles/home'
 import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -13,92 +12,63 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import GridOffIcon from '@material-ui/icons/GridOff';
+import LoopIcon from '@material-ui/icons/Loop';
 import AppsIcon from '@material-ui/icons/Apps';
 
-import axios from 'axios'
-import { Link } from 'react-router-dom'
 import { motion } from "framer-motion"
 
-import useStyles from './styles/home'
+const SupervisorHome = (props) => {
+    const { supData, officerID } = props.location,
+    classes = useStyles(),
+    { root, profilePaper } = classes,
+    [supervisor, setSupervisor] = useState({logs:[]}),
+    [logBucket, setLogBucket] = useState([]),
+    [loadingPage, setLoadingPage] = useState(true),
+    [noLogsAlert, setNoLogsAlert] = useState(false),
+    [noLogMsg, setNoLogMsg] = useState(''),
+    [showSearchedLog, setShowSearchedLog] = useState(false)
 
 
-const Home = (props) => {
-    const { userData } = useContext(UserContext)
-    const token = userData.token
-    const { profileData, setProfileData } = useContext(ProfileContext)
-    const { CurrentLog, setCurrentLog} = useContext(CurrentLogContext)
-    const classes = useStyles();
-    const { root, profilePaper } = classes
-    const [showSearchedLog, setShowSearchedLog] = useState(false)
-    const [logBucket, setLogBucket] = useState(profileData.logs)
-    const [noLogsAlert, setNoLogsAlert] = useState(false)
-    const [noLogMsg, setNoLogMsg] = useState('')
-    
+    useEffect(async ()=>{
+        await loadSupervisorProfile();
+
+        console.log(supervisor.logs)
+      },[])
+
     const loadSupervisorProfile = async ()=> {
-      //check userProfile in local storage
-      let data;
-        console.log('fetching profile from server...') 
-        let response = await axios.get('api/profile/me', { headers: { "x-auth-token": token}})
-
-        localStorage.setItem('userProfile', JSON.stringify(response.data));
-        data = await JSON.parse(localStorage.getItem('userProfile'))
-        setProfileData({
-          name : data.name,
-          designation: data.designation,
-          batch: data.batch,
-          logs: [...data.logs] ,
-          employeeId: data.employeeId
+        let res = await axios.get(`/api/officerProfile/user/${supData._id}`)
+        setSupervisor({
+          name : res.data.name,
+          designation: res.data.designation,
+          batch: res.data.batch,
+          logs: [...res.data.logs],
+          employeeId: res.data.employeeId
         })
-        setLogBucket([...data.logs])
-      // }
-
-      console.log(data.logs)
-      await setCurrentLog(undefined)
+        setLogBucket([...res.data.logs])
+        setLoadingPage(false)
+    }
+    
+    const 
+    paperTransition = {     //to make page transition using framer-motion library
+      in: {
+        opacity: 1,
+        y:0,
+      },
+      out:{
+        opacity: 0,
+        y: "100vh"
+      }
+    },
+    pageTransition = {
+      duration: 0.3,
+      transition: 'linear'
     },
 
-    loadOfficerViewProfile = async()=> {
-      
-    }
-    
-    useEffect(async ()=>{
-      await loadSupervisorProfile();
-      console.log('home page loaded + Profile')
-    },[])
-
-    
-    const searchLog = async (evt)=> {
-      let foundLogs = 0
-      console.log(profileData.logs)
-      let searchDate = evt.target.value
-      searchDate = searchDate.split("-").reverse().join('-')
-      console.log(searchDate)
-      let arr = []
-
-      for(let i=0; i<profileData.logs.length; i++){
-        if(profileData.logs[i].header[0].date === searchDate){
-          arr.push(profileData.logs[i])
-          foundLogs++
-        }
-      }
-      if(foundLogs === 0){
-        console.log('log not found')
-        setNoLogsAlert(true)
-        setNoLogMsg('No Logs found on this date!')
-        setTimeout(() => {
-          setNoLogsAlert(false)
-        }, 5000);
-        setLogBucket(profileData.logs)
-      }else{
-        setNoLogsAlert(false)
-        setNoLogMsg('')
-        setLogBucket(arr)
-        setShowSearchedLog(true)
-      }
-    }
-
-    const displayLog = ()=> {
+    displayLog = ()=> {
       let divArray = []
-      logBucket.map(log=>{
+      console.log(logBucket)
+      logBucket.map(log=> {
+        let date = log.header[0].date
         divArray.push(<Card className={classes.card}>
           <CardContent className={classes.cardRoot}>
             <Typography className={classes.dateDay} gutterBottom>
@@ -123,7 +93,7 @@ const Home = (props) => {
               }
           </CardContent>
           <CardActions className={classes.cardActions}>
-            <Link to={{ pathname: "/Log", state: log }} style={{textDecoration:'none'}}>
+            <Link to={{ pathname: `/officer+${officerID}/supervisorHome_${supervisor.employeeId}/log_${date}}`, state: log }} style={{textDecoration:'none'}}>
               <Button size="small" variant="outlined" className={classes.openLogButton}>
                 Open Log
               </Button>
@@ -131,29 +101,44 @@ const Home = (props) => {
           </CardActions>
         </Card>)
       })
-      return divArray.reverse();
-    }
-    
-    const 
-    paperTransition = {     //to make page transition using framer-motion library
-      in: {
-        opacity: 1,
-        y:0,
-      },
-      out:{
-        opacity: 0,
-        y: "100vh"
-      }
+      divArray.reverse()
+      return divArray
     },
-    pageTransition = {
-      duration: 0.3,
-      transition: 'linear'
+    
+    searchLog = async (evt)=> {
+      let foundLogs = 0
+      console.log(logBucket)
+      let searchDate = evt.target.value
+      searchDate = searchDate.split("-").reverse().join('-')
+      console.log(searchDate)
+      let arr = []
+
+      for(let i=0; i<logBucket.length; i++){
+        if(logBucket[i].header[0].date === searchDate){
+          arr.push(logBucket[i])
+          foundLogs++
+        }
+      }
+      if(foundLogs === 0){
+        console.log('log not found')
+        setNoLogsAlert(true)
+        setNoLogMsg('No Logs found on this date!')
+        setTimeout(() => {
+          setNoLogsAlert(false)
+        }, 5000);
+        setLogBucket(supervisor.logs)
+      }else{
+        setNoLogsAlert(false)
+        setNoLogMsg('')
+        setLogBucket(arr)
+        setShowSearchedLog(true)
+      }
     }
+
     return (
-          !userData.user ?     //check if not logged in
-            <h1>You need to be logged in to Access this page!</h1>
-          :
-          <motion.div className={root} 
+        <>
+        {loadingPage ? <div className={classes.loadingIcon}><LoopIcon/><span>Fetching Data from Database...</span></div> :
+        <motion.div className={root} 
           initial="out" 
           animate="in" 
           exit="out" 
@@ -163,30 +148,23 @@ const Home = (props) => {
             <Paper elevation={1} className={profilePaper}>
               <div className={classes.paperObject}>
                 <span className={classes.paperProperty}>Train Examiner</span>  
-                <span className={classes.paperValue}>{profileData.name}</span>
+                <span className={classes.paperValue}>{supervisor.name}</span>
               </div>
               <div className={classes.paperObject}>
                 <span className={classes.paperProperty}>Employee ID</span> 
-                <span className={classes.paperValue}>{profileData.employeeId}</span>
+                <span className={classes.paperValue}>{supervisor.employeeId}</span>
               </div>
               <div className={classes.paperObject}>
                 <span className={classes.paperProperty}>Designation</span> 
-                <span className={classes.paperValue}>{profileData.designation}</span>
+                <span className={classes.paperValue}>{supervisor.designation}</span>
               </div>
               <div className={classes.paperObject}>
                 <span className={classes.paperProperty}>Batch</span> 
-                <span className={classes.paperValue}>{profileData.batch}</span>
+                <span className={classes.paperValue}>{supervisor.batch}</span>
               </div>
-
             </Paper>
+            
             <div className={classes.buttons}>
-                <Link to='/LogForm' style={{textDecoration:'none'}}>
-                    <Button size="small" variant="outlined" className={classes.createNewLogButton}>
-                      Create New Log
-                      <PostAddIcon fontSize="large"/>
-                    </Button>
-                </Link>
-                
             <form className={classes.container} noValidate>  {/*search button*/}
               <TextField
                 error= {noLogsAlert}
@@ -203,13 +181,13 @@ const Home = (props) => {
               />
             </form>
             </div>
-
+            
             <div className={classes.allLogs}> 
               {
-                profileData.logs.length > 0 ?     //display all logs
+                logBucket.length > 0 ?     //display all logs
                   displayLog()
                 :
-                  <div className={classes.noLogMsg, setNoLogMsg}>
+                  <div className={classes.noLogMsg}>
                     <GridOffIcon />  
                     <span>No Logs Added! </span>
                   </div>
@@ -223,7 +201,7 @@ const Home = (props) => {
                   onClick={()=> {
                     setNoLogsAlert(false)
                     setShowSearchedLog(false)
-                    setLogBucket(profileData.logs)
+                    setLogBucket(supervisor.logs)
                   }}
                 >
                   Show All Logs
@@ -232,8 +210,12 @@ const Home = (props) => {
                 : <></>
               }
             </div>
+            
           </motion.div>
+}
+          </>
     )
 }
 
-export default Home
+export default SupervisorHome
+

@@ -69,7 +69,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = () => {
+const Login = (props) => {
+    const { userTypePath } = props;
     const classes = useStyles();
     const history = useHistory()
     const {register, handleSubmit } = useForm()
@@ -77,16 +78,34 @@ const Login = () => {
     const [loginError, setloginError] = useState(false)
     const [helperTextEmail, sethelperTextEmail] = useState('')
     const [helperTextPassword, sethelperTextPassword] = useState('')
+    const [gotoRoute, setGotoRoute] = useState("")
 
-    const onSubmit = async data=> {
-      console.log(data)
+    const onSubmit = async (data, userType)=> {       //userType by default = supervisor
+      if(userType === "officer") console.log('%%%%%%%%%%%%%%%%%%%%%%%')
+      let url = "api/auth";
+
+      //if userType is officer set url to "api/officerAuth" else by default it's set to user(supervisor)
+      if(userType === "officer"){
+        url = "api/officerAuth";
+        console.log('sending request to officer');
+        setGotoRoute('/officerHome')
+      }else{
+        url = "api/auth";
+        console.log('sending request to supervisor route');
+        setGotoRoute('/home');
+      }
+
       axios
-      .post("api/auth",data)
+      .post(url,data)
       .then(async response=> {
         console.log(response)
+        console.log('post succesful!!!')
+        url === "api/auth" ?  userTypePath("supervisor") : userTypePath("officer")
         const token = response.data.token
+        console.log(token)
+        console.log(`sending get request on ${url}`)
         const tokenRes = await axios.get(
-          "/api/auth",
+          url,
           { headers: { "x-auth-token": token}}
         )
 
@@ -95,13 +114,23 @@ const Login = () => {
           user: tokenRes.data
         })
         localStorage.setItem('x-auth-token', token);
-        history.push('/home')
+
+        history.push(gotoRoute)
       })
-      .catch(err=> {
-        console.log('!!!!!!!!!!!'+err)
-        setloginError(true)
-        sethelperTextEmail('Enter Valid Email ID')
-        sethelperTextPassword('Enter Valid Password')
+      .catch(async err=> {
+
+        //if userType is not specified it means it's set to supervisor(i.e !="officer") by default
+        if(userType !== "officer"){
+          //now set userType to officer and send request again
+          await onSubmit(data, "officer")
+        }
+
+        //if user is set to officer it means credentials are wrong
+          console.log(err+'!!!!!!!!!!!')
+          setloginError(true)
+          sethelperTextEmail('Enter Valid Email ID')
+          sethelperTextPassword('Enter Valid Password')
+          
         console.log(data)
       })
     }
@@ -179,3 +208,21 @@ const Login = () => {
   }
 
 export default Login;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{/*
+
+  
+*/}
