@@ -11,6 +11,7 @@ import Trains from './components/logFormContents/Trains'
 import Coach from './components/logFormContents/Coach'
 import Log from './components/Log' 
 import Header from './components/logFormContents/Header' 
+import SupervisorHome from './components/officerLogs/supervisorHome'
 
 import axios from 'axios'
 import UserContext from './context/UserContext'
@@ -108,11 +109,13 @@ function App() {
                               <Fragment>
                               {
                                 userType === "supervisor" ?
-                                <Route exact path='/' component={Home } />
+                                <Route exact path='/' component={ Home }/>
                                 :
                                 <Route exact path='/' component={OfficerHome}/>  
                               }
                               <Route exact path='/home' component={ Home } /> 
+                              <Route exact path='/officer:officerName/supervisorHome:supID' component={ SupervisorHome } /> 
+                              <Route exact path='/officer:officerName/supervisorHome:supID/log:logDate' component={ Log } /> 
                               <Route exact path='/officerHome' component={ OfficerHome } /> 
                               <Route exact path='/login' component={ Home }/>
                                 <Route exact path='/LogForm' component={ LogForm } /> 

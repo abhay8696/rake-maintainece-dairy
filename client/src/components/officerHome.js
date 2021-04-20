@@ -17,7 +17,7 @@ import GridOffIcon from '@material-ui/icons/GridOff';
 import AppsIcon from '@material-ui/icons/Apps';
 
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { motion } from "framer-motion"
 
 import useStyles from './styles/home'
@@ -71,7 +71,8 @@ const useStyles2 = makeStyles((theme) => ({
 
 const OfficerHome = ()=> {
     const { userData } = useContext(UserContext)
-    const token = userData.token
+    const token = userData.token;
+    const history = useHistory();
     const { profileData, setProfileData } = useContext(ProfileContext)
     const { CurrentLog, setCurrentLog} = useContext(CurrentLogContext)
     
@@ -140,7 +141,17 @@ const OfficerHome = ()=> {
                   Batch: {supervisor.batch}
                 </span>
             </CardContent>
-                <Link style={{textDecoration:'none'}}  className={classes2.button} onClick={()=> openLog(supervisor)}>
+                <Link 
+                  to={
+                    { 
+                    pathname: `/officer_${profileData.employeeId}/supervisorHome_${supervisor.employeeId}`, 
+                    supData:supervisor,
+                    officerID: profileData.employeeId
+                  }
+                  }
+                  style={{textDecoration:'none'}}  
+                  className={classes2.button} 
+                >
                   <Button size="small" variant="outlined" className={classes.openLogButton}>
                     <ForwardIcon/>
                   </Button>
@@ -148,12 +159,6 @@ const OfficerHome = ()=> {
           </Card>)
         })
         return divArray.reverse();
-      }
-
-      const openLog = async (data)=> {
-        console.log(data._id)
-        let res = await axios.get(`/api/officerProfile/user/${data._id}`)
-        console.log(res)
       }
 
     return (
