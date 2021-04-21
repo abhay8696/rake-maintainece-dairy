@@ -5,6 +5,10 @@ import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
 
 import LockIcon from '@material-ui/icons/Lock';
 import Typography from '@material-ui/core/Typography';
@@ -78,14 +82,15 @@ const Login = (props) => {
     const [loginError, setloginError] = useState(false)
     const [helperTextEmail, sethelperTextEmail] = useState('')
     const [helperTextPassword, sethelperTextPassword] = useState('')
+    const [helperTextDesignation, sethelperTextDesignation] = useState('')
+    const [designation, setDesignation] = useState('')
     const [gotoRoute, setGotoRoute] = useState("")
 
-    const onSubmit = async (data, userType)=> {       //userType by default = supervisor
-      if(userType === "officer") console.log('%%%%%%%%%%%%%%%%%%%%%%%')
-      let url = "api/auth";
+    const onSubmit = async (data)=> {       
+      let url = "api/auth";   //userType by default = supervisor
 
-      //if userType is officer set url to "api/officerAuth" else by default it's set to user(supervisor)
-      if(userType === "officer"){
+      //if designation === officer set url to "api/officerAuth" else by default it's set to user(supervisor)
+      if(designation === "Senior Officer"){
         url = "api/officerAuth";
         console.log('sending request to officer');
         setGotoRoute('/officerHome')
@@ -115,23 +120,10 @@ const Login = (props) => {
         })
         localStorage.setItem('x-auth-token', token);
 
-        history.push(gotoRoute)
+        // history.push(gotoRoute)
       })
       .catch(async err=> {
-
-        //if userType is not specified it means it's set to supervisor(i.e !="officer") by default
-        if(userType !== "officer"){
-          //now set userType to officer and send request again
-          await onSubmit(data, "officer")
-        }
-
-        //if user is set to officer it means credentials are wrong
-          console.log(err+'!!!!!!!!!!!')
-          setloginError(true)
-          sethelperTextEmail('Enter Valid Email ID')
-          sethelperTextPassword('Enter Valid Password')
-          
-        console.log(data)
+        console.log(err)
       })
     }
 
@@ -170,6 +162,26 @@ const Login = (props) => {
               helperText={helperTextEmail}
               onChange={()=>{ sethelperTextEmail(''); setloginError(false)}}
             />
+            <FormControl variant="outlined" className={classes.formControl} fullWidth 
+              margin="normal">
+              <InputLabel>Designation</InputLabel>
+              <Select
+              id="demo-simple-select"
+              label="Designation"
+              fullWidth
+              variant="outlined" 
+              margin="normal"
+              onChange={(evt)=> {sethelperTextDesignation(''); setDesignation(evt.target.value)}}
+              error={loginError}
+              helperText={helperTextEmail}
+              inputRef={register}
+              required
+              >
+                <MenuItem value={'Senior Officer'}>Senior Officer</MenuItem>
+                <MenuItem value={'Senior Section Engineer'}>Senior Section Engineer</MenuItem>
+                <MenuItem value={'Junior Engineer'}>Junior Engineer</MenuItem>
+              </Select>
+            </FormControl>
             <TextField
               variant="outlined"
               margin="normal"
