@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import AppsIcon from '@material-ui/icons/Apps';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Tooltip from '@material-ui/core/Tooltip';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 import './styles/Navbar.css'
 

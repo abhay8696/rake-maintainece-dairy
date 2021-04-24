@@ -93,7 +93,11 @@ const SupervisorHome = (props) => {
               }
           </CardContent>
           <CardActions className={classes.cardActions}>
-            <Link to={{ pathname: `/officer+${officerID}/supervisorHome_${supervisor.employeeId}/log_${date}}`, state: log }} style={{textDecoration:'none'}}>
+            <Link to={{ 
+                      pathname: `/officer_${officerID}/supervisorHome_${supervisor.employeeId}/log_${date}}`,
+                      prop: {logData: log, txr: supervisor.name}
+                    }} 
+                  style={{textDecoration:'none'}}>
               <Button size="small" variant="outlined" className={classes.openLogButton}>
                 Open Log
               </Button>
@@ -172,7 +176,7 @@ const SupervisorHome = (props) => {
                 id="date"
                 label="Search By Date"
                 type="date"
-                defaultValue="2021-03-23"
+                defaultValue="yyyy-mm-dd"
                 className={classes.textField}
                 InputLabelProps={{
                   shrink: true,

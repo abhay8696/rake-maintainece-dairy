@@ -15,6 +15,10 @@ import ForwardIcon from '@material-ui/icons/Forward';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import GridOffIcon from '@material-ui/icons/GridOff';
 import AppsIcon from '@material-ui/icons/Apps';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
 
 import axios from 'axios'
 import { Link, useHistory } from 'react-router-dom'
@@ -67,6 +71,21 @@ const useStyles2 = makeStyles((theme) => ({
     display: 'flex', alignItems: 'center',
     marginLeft: '4px'
   },
+  searchNfilter:{
+    [theme.breakpoints.down('sm')]:{
+      width: '100%',
+    },
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  filter: {
+    width: '45%',
+    margin: '0px'
+  },
+  searchBox: {
+    width: '45%'
+  },
 }));
 
 const OfficerHome = ()=> {
@@ -83,6 +102,9 @@ const OfficerHome = ()=> {
     const [noLogsAlert, setNoLogsAlert] = useState(false)
     const [noLogMsg, setNoLogMsg] = useState('')
     const [supervisorList, setSupervisorList] = useState([])
+    const [filteredList, setFilteredList] = useState([])
+    const [filterMsg, setFilterMsg] = useState('')
+    const [toggleError, setToggleError] = useState(false)
 
     const loadProfile = async ()=> {
         console.log("fetching Data from server...")
@@ -121,9 +143,13 @@ const OfficerHome = ()=> {
       duration: 0.3,
       transition: 'linear'
     }
-    const displaySupervisors = ()=> {
-        let divArray = []
-        supervisorList.map(supervisor=>{
+    const displaySupervisors = (listType)=> {
+        let divArray = [], list;
+
+        //decide if all supersvisors to show or only filtered supervisors to show
+        listType === "filteredSups" ? list = filteredList : list = supervisorList
+
+        list.map(supervisor=>{
           let desg
           supervisor.designation === "Senior Section Engineer" ? desg= "SSE" : desg="JE"
           divArray.push(<Card className={classes2.card}>
@@ -158,8 +184,42 @@ const OfficerHome = ()=> {
                 </Link>
           </Card>)
         })
-        return divArray.reverse();
+        return divArray;
       }
+    
+    const filterFunc = evt=> {
+      let desg = evt.target.value
+      let array = [];
+      for(let i=0; i<supervisorList.length; i++){
+        if(desg === supervisorList[i].designation){
+          array.push(supervisorList[i])
+        }
+        else setFilteredList([])
+      }
+      setFilteredList([...array])
+    }
+    const handleSearch = evt=> {
+      let name = evt.target.value;
+      let array = [];
+
+      if(evt.key === 'Enter'){
+        console.log(name)
+        for(let i=0; i<supervisorList.length; i++){
+          if(name && supervisorList[i].name.toLowerCase().includes(name.toLowerCase())){
+            array.push(supervisorList[i])
+          }
+        }
+        if(array.length === 0) {
+          setToggleError(true)
+          setFilterMsg('No Match Found!')
+        }
+      }
+      setFilteredList([...array])
+      setTimeout(() => {
+        setToggleError(false)
+        setFilterMsg('')
+      }, 5000);
+    }
 
     return (
         !userData.user ?     //check if not logged in
@@ -191,31 +251,45 @@ const OfficerHome = ()=> {
             </div>
           </Paper>
           
-          <div className={classes.buttons}>
-            <form className={classes.container} noValidate>  {/*search button*/}
-              <TextField
-                error= {noLogsAlert}
-                helperText={noLogMsg}
-                id="date"
-                label="Search By Name"
-                type="text"
-                defaultValue="Supervisor Name"
-                className={classes.textField}
-                InputLabelProps={{
-                  shrink: true,
-                }} 
-                variant="outlined"
-                // onChange={(evt)=> searchLog(evt)}
-              />
-            </form>
+          <div className={classes2.searchNfilter}>
+            <FormControl variant="outlined" className={classes2.filter}
+              margin="normal">
+              <InputLabel>Filter</InputLabel>
+              <Select
+              id="demo-simple-select"
+              label="Designation"
+              fullWidth
+              variant="outlined" 
+              margin="normal"
+              onChange={(evt)=> filterFunc(evt)}
+              >
+                <MenuItem value={''}>None</MenuItem>
+                <MenuItem value={'Junior Engineer'}>Show All JEs</MenuItem>
+                <MenuItem value={'Senior Section Engineer'}>Show All SSEs</MenuItem>
+              </Select>
+            </FormControl>
+            <TextField 
+              label='Search By Name' 
+              variant="outlined" 
+              className={classes2.searchBox}
+              onKeyPress = {evt=> handleSearch(evt)}
+              error= {toggleError}
+              helperText={filterMsg}
+            />
+          </div>
+
+            <div className={classes.allLogs}> 
+              {     
+                //display filteredList 
+                  filteredList  ? displaySupervisors('filteredSups') : <></>
+              }
             </div>
             
+            <div>All Supervisors</div>
             <div className={classes.allLogs}> 
-              {     //display all logs
-                  supervisorList  ?
-                  displaySupervisors()
-                  :
-                  <h1>Loading Supervisor List</h1>
+              {     
+                //display all logs 
+                  supervisorList  ? displaySupervisors('allSups') : <h1>Loading Supervisor List</h1>
               }
             </div>
         </motion.div>

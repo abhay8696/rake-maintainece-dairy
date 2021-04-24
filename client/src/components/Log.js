@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import ProfileContext from '../context/ProfileContext' 
 import { motion } from "framer-motion"
 
 import Header from './logContents/Header'
@@ -6,6 +7,11 @@ import Staff from './logContents/Staff'
 import Trains from './logContents/Trains'
 
 import { makeStyles } from '@material-ui/core/styles';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const useStyles = makeStyles((theme) => ({
     root:{
@@ -19,12 +25,23 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('sm')]:{
             margin: theme.spacing(0.5),
         }, 
+        position: 'relative'
+    },
+    secondNavbar:{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '4px',
+        width: '100%',
+        position: 'fixed'
     },
 }));
 
 const Log = (props) => {
     const classes = useStyles()
-    const logData = props.location.state
+    const logData = props.location.prop.logData
+    const txr = props.location.prop.txr
+    const { profileData, setProfileData } = useContext(ProfileContext)
     console.log(logData)
 
     const [isLogAvailable, setisLogAvailable] = useState(false)
@@ -47,6 +64,8 @@ const Log = (props) => {
       duration: 0.3,
       transition: 'linear'
     }
+
+
     const display = ()=> {
         console.log(logData.trains[1])
         const {date, day, depot } = logData.header[0]
@@ -64,6 +83,7 @@ const Log = (props) => {
             })
             return trainArray;
         }
+
         return  <motion.div className={classes.root}
                 initial="out" 
                 animate="in" 
@@ -101,6 +121,7 @@ const Log = (props) => {
                         :
                         <h3>Staff data not available</h3>
                     }
+                    
                 </motion.div >
     }
     
