@@ -161,7 +161,7 @@ const OfficerHome = ()=> {
                   ID: {supervisor.employeeId}
                 </span>
                 <span className={classes2.supDesignation}>
-                  {supervisor.designation}
+                  {desg}
                 </span>
                 <span  className={classes2.supBatch}>
                   Batch: {supervisor.batch}
