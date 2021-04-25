@@ -157,14 +157,14 @@ const OfficerHome = ()=> {
                 <span className={classes2.supName}>
                   {supervisor.name}
                 </span>
-                <span  className={classes2.supID}>
-                  ID: {supervisor.employeeId}
-                </span>
                 <span className={classes2.supDesignation}>
                   {desg}
                 </span>
                 <span  className={classes2.supBatch}>
                   Batch: {supervisor.batch}
+                </span>
+                <span  className={classes2.supID}>
+                  ID: {supervisor.employeeId}
                 </span>
             </CardContent>
                 <Link 
