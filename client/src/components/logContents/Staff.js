@@ -152,11 +152,20 @@ const useStyles = makeStyles((theme) => ({
     }
     // maxWidth: '500px'
   },
+  txr:{
+    // backgroundColor: 'teal',
+    display: 'flex', justifyContent: 'center',
+    fontSize: '1rem',
+    padding: theme.spacing(1),
+    '& > *': {
+      margin :'auto 4px'
+    },
+  },
   }));
 
 const Staff = (props) => {
     const {testing, carpentry, oiling, otherWorks, 
-        pipeFitting, strength, underGear , logData} = props,
+        pipeFitting, strength, underGear, trainExaminer, logData} = props,
         {absent, onLeave, onRoll, physicallyPresent, sick, underRest} = logData.staff[0].totalSacntionedStrength,
         works1 = ['Testing','Carpentry',
                   'Pipe Line','Under Gear','Oiling','Other Works',],
@@ -197,6 +206,10 @@ const Staff = (props) => {
       <div className={classes.root}>
         <Paper elevation={3} className={classes.paperRoots}>
         <span className={classes.paperTitle}>Staff</span>
+              <div className={classes.txr}>
+                <span className={classes.paperProperty}>Train Examiner: </span> 
+                <span>{trainExaminer}</span>
+              </div>
         <div  className={classes.paperObjectDiv}>
           {
             displayPaperObjects()

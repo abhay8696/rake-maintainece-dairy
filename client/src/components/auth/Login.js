@@ -124,6 +124,7 @@ const Login = (props) => {
       })
       .catch(async err=> {
         console.log(err)
+        setloginError(true)
       })
     }
 

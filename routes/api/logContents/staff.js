@@ -9,10 +9,12 @@ const   express     = require('express'),
 // @route   GET api/log/:logID
 // @desc    Get log with given logID
 // @access  Private
-router.get('/:logId/:staff', auth, async (req, res)=> {
+router.get('/:logId/:staffID', auth, async (req, res)=> {
     try{
-        const staff = await Staff.findOne({ id: req.params.staffID })
-        const log = await Log.findOne({ id: req.params.logId })
+        const staff = await Staff.findOne({ _id: req.params.staffID })
+        const log = await Log.findOne({ _id: req.params.logId })
+        const user = await User.findById(req.user.id).select('-password');
+        // res.json(user.name)
 
         if(!staff){
             return res.status(400).json({ msg: 'There is no staff for this logID'})
@@ -37,6 +39,7 @@ router.post('/:logId', auth, async (req, res)=> {
     const {onRoll, physicallyPresent, underRest, onLeave, absent, sick} = req.body.totalSacntionedStrength
     const staffData = {
         log: req.params.logId,
+        trainExaminer: user.name,
         underGear: underGear,
         brakePower: brakePower,
         pipeFitting: pipeFitting,
@@ -73,7 +76,7 @@ router.post('/:logId', auth, async (req, res)=> {
             await staff.save();
             // await log.staff.push(staff)
             await log.save()
-            return(res.json(log)) 
+            return(res.json(staff)) 
         }
     }catch(err){
         console.error(err.message);

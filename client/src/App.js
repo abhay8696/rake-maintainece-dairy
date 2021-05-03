@@ -115,7 +115,6 @@ function App() {
                               }
                               <Route exact path='/home' component={ Home } /> 
                               <Route exact path='/officer:officerName/supervisorHome:supID' component={ SupervisorHome } /> 
-                              <Route exact path='/officer:officerName/supervisorHome:supID/log:logDate' component={ Log } /> 
                               <Route exact path='/officerHome' component={ OfficerHome } /> 
                               <Route exact path='/login' component={ Home }/>
                                 <Route exact path='/LogForm' component={ LogForm } /> 
@@ -123,6 +122,7 @@ function App() {
                                 <Route exact path='/LogForm/train/coaches' component={ Coach } /> 
                                 <Route exact path='/Log' component={ Log } /> 
                                 <Route exact path='/log/header' component={ Header } /> 
+                              <Route exact path='/log/:logDate' component={ Log } /> 
                               </Fragment>
                               :
                               <Fragment>

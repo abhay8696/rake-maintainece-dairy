@@ -13,62 +13,58 @@ const   express     = require('express'),
 // @access  Private
 
 
-router.get('/:userID',async (req, res)=> {
+router.get('/',auth, async (req, res)=> {
     // res.json(req.params.userID) "employeeId": 1111,
     try{
-        const profile = await Profile.findOne({user:{_id: req.params.userID}})
-            .populate(
-                'user',
-                ['name', 'email', 'batch', 'designation', 'employeeId']
-            )
-            .populate({ //nested populate
-                path: 'logs',
+        const profile = await Profile.find()
+        .populate({ //nested populate
+            path: 'logs',
+            populate: {
+                path: 'header',
+                model: Header
+            },
+            model: Log
+        })
+        .populate({ //nested populate
+            path: 'logs',
+            populate: {
+                path: 'staff',
+                model: Staff
+            },
+            model: Log
+        })
+        .populate({
+            path: 'logs',
                 populate: {
-                    path: 'header',
-                    model: Header
+                    path: 'trains',
+                        populate: {
+                            path: 'coaches',
+                            model: Coach
+                        },
+                    model: Train
                 },
-                model: Log
-            })
-            .populate({ //nested populate
-                path: 'logs',
+            model: Log
+        })
+        .populate({
+            path: 'logs',
                 populate: {
-                    path: 'staff',
-                    model: Staff
+                    path: 'trains',
+                        populate: {
+                            path: 'sickCoaches',
+                            model: SickCoach
+                        },
+                    model: Train
                 },
-                model: Log
-            })
-            .populate({
-                path: 'logs',
-                    populate: {
-                        path: 'trains',
-                            populate: {
-                                path: 'coaches',
-                                model: Coach
-                            },
-                        model: Train
-                    },
-                model: Log
-            })
-            .populate({
-                path: 'logs',
-                    populate: {
-                        path: 'trains',
-                            populate: {
-                                path: 'sickCoaches',
-                                model: SickCoach
-                            },
-                        model: Train
-                    },
-                model: Log
-            })
-            .populate({
-                path: 'logs',
-                populate: {
-                    path: 'washingAndCleaning',
-                    model: WashingAndCleaning
-                },
-                model: Log
-            })
+            model: Log
+        })
+        .populate({
+            path: 'logs',
+            populate: {
+                path: 'washingAndCleaning',
+                model: WashingAndCleaning
+            },
+            model: Log
+        })
 
         if(!profile){
             return res.json({ msg: 'There is no profile for this user'})

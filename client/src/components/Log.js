@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 const Log = (props) => {
     const classes = useStyles()
     const logData = props.location.prop.logData
-    const txr = props.location.prop.txr
+    // const txr = props.location.prop.txr
     const { profileData, setProfileData } = useContext(ProfileContext)
     console.log(logData)
 
@@ -67,10 +67,10 @@ const Log = (props) => {
 
 
     const display = ()=> {
-        console.log(logData.trains[1])
+        console.log(logData)
         const {date, day, depot } = logData.header[0]
         if(logData.staff[0]){
-            var {brakePower, carpentry, oiling, otherWorks, pipeFitting, underGear} = logData.staff[0];
+            var {trainExaminer, brakePower, carpentry, oiling, otherWorks, pipeFitting, underGear} = logData.staff[0];
         }
         console.log(logData.staff[0])
         const displayTrains = ()=> {
@@ -110,13 +110,14 @@ const Log = (props) => {
                     {
                         logData.staff[0] ?
                         <Staff
-                        testing     = {brakePower}
-                        carpentry   = {carpentry}
-                        oiling      = {oiling}
-                        otherWorks  = {otherWorks}
-                        pipeFitting = {pipeFitting}
-                        logData    = {logData}
-                        underGear   = {underGear}
+                        testing         = {brakePower}
+                        carpentry       = {carpentry}
+                        oiling          = {oiling}
+                        otherWorks      = {otherWorks}
+                        pipeFitting     = {pipeFitting}
+                        logData         = {logData}
+                        underGear       = {underGear}
+                        trainExaminer   = {trainExaminer}
                         />
                         :
                         <h3>Staff data not available</h3>

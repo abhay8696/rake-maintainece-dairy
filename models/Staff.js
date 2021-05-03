@@ -6,6 +6,9 @@ const StaffSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'log'
     },
+    trainExaminer: {
+        type:  String
+    },
     underGear: {
         type:  String
     },

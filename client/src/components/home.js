@@ -123,7 +123,7 @@ const Home = (props) => {
               }
           </CardContent>
           <CardActions className={classes.cardActions}>
-            <Link to={{ pathname: "/Log", state: log }} style={{textDecoration:'none'}}>
+            <Link to={{ pathname: "/Log", prop: {logData: log}}} style={{textDecoration:'none'}}>
               <Button size="small" variant="outlined" className={classes.openLogButton}>
                 Open Log
               </Button>

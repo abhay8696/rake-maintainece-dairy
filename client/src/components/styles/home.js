@@ -38,8 +38,11 @@ const useStyles = makeStyles((theme) => ({
       },
       maxWidth: '500px'
     },
+    paperProperty:{
+      fontWeight: 'bold'
+    },
     paperValue: {
-      fontSize: '2rem',
+      fontSize: '1.3rem',
       '& > *': {
           display: 'flex',
           flexDirection: 'column',
@@ -148,6 +151,7 @@ const useStyles = makeStyles((theme) => ({
       width: '100%',
       display: 'flex',
       justifyContent: 'space-around',
+      margin: '16px auto'
     },
     openLogButton:{
       color: '#cc5577',
